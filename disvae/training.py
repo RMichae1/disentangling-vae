@@ -86,15 +86,15 @@ class Trainer():
                                                                                mean_epoch_loss))
             self.losses_logger.log(epoch, storer)
 
-            if self.gif_visualizer is not None:
-                self.gif_visualizer()
+            # if self.gif_visualizer is not None: # TODO: disabled, not working for custom datasets
+            #     self.gif_visualizer()
 
             if epoch % checkpoint_every == 0:
                 save_model(self.model, self.save_dir,
                            filename="model-{}.pt".format(epoch))
 
-        if self.gif_visualizer is not None:
-            self.gif_visualizer.save_reset()
+        # if self.gif_visualizer is not None: # TODO: disabled, not working for custom datasets
+        #     self.gif_visualizer.save_reset()
 
         self.model.eval()
 
@@ -146,7 +146,10 @@ class Trainer():
         storer: dict
             Dictionary in which to store important variables for vizualisation.
         """
-        batch_size, channel, height, width = data.size()
+        if len(data.shape) == 3:
+            batch_size, channel, dim = data.size()
+        else:
+            batch_size, channel, height, width = data.size()
         data = data.to(self.device)
 
         try:

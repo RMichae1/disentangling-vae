@@ -423,7 +423,10 @@ def _reconstruction_loss(data, recon_data, distribution="bernoulli", storer=None
         Per image cross entropy (i.e. normalized per batch but not pixel and
         channel)
     """
-    batch_size, n_chan, height, width = recon_data.size()
+    if len(recon_data.size()) == 3:
+        batch_size, n_chan, dim = recon_data.size()
+    else:
+        batch_size, n_chan, height, width = recon_data.size()
     is_colored = n_chan == 3
 
     if distribution == "bernoulli":

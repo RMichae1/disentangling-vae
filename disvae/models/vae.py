@@ -9,7 +9,7 @@ from disvae.utils.initialization import weights_init
 from .encoders import get_encoder
 from .decoders import get_decoder
 
-MODELS = ["Burgess"]
+MODELS = ["Burgess", "Seq"]
 
 
 def init_specific_model(model_type, img_size, latent_dim):
@@ -38,12 +38,15 @@ class VAE(nn.Module):
         """
         super(VAE, self).__init__()
 
-        if list(img_size[1:]) not in [[32, 32], [64, 64]]:
+        if list(img_size[1:]) not in [[32, 32], [64, 64]] and not "Seq" in encoder.__name__:
             raise RuntimeError("{} sized images not supported. Only (None, 32, 32) and (None, 64, 64) supported. Build your own architecture or reshape images!".format(img_size))
 
         self.latent_dim = latent_dim
         self.img_size = img_size
-        self.num_pixels = self.img_size[1] * self.img_size[2]
+        if len(self.img_size) > 2:
+            self.num_pixels = self.img_size[1] * self.img_size[2]
+        else:
+            self.num_pixels = self.img_size[1]
         self.encoder = encoder(img_size, self.latent_dim)
         self.decoder = decoder(img_size, self.latent_dim)
 
