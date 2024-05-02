@@ -6,6 +6,7 @@ import zipfile
 import glob
 import logging
 import tarfile
+from pathlib import Path
 from skimage.io import imread
 from PIL import Image
 from tqdm import tqdm
@@ -22,7 +23,9 @@ DATASETS_DICT = {"mnist": "MNIST",
                  "fashion": "FashionMNIST",
                  "dsprites": "DSprites",
                  "celeba": "CelebA",
-                 "chairs": "Chairs"}
+                 "chairs": "Chairs",
+                 "gfp": "GFP",
+                 "yeast": "Yeast"}
 DATASETS = list(DATASETS_DICT.keys())
 
 
@@ -380,6 +383,70 @@ class FashionMNIST(datasets.FashionMNIST):
                              transforms.Resize(32),
                              transforms.ToTensor()
                          ]))
+
+
+class Yeast(DisentangledDataset):
+    """Proteingym embedded Yeast data wrapper"""
+    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", transforms_list=[], logger=logging.getLogger(__name__)) -> None:
+        self.subsets = ["his", "pabp"]
+        self.embedding = embedding
+        X_lst = []
+        for subdir in self.subsets: # TODO: make MSA or DMS an option for the dataset?
+            dms_data_path = [f for f in (root / subdir).glob(f"{subdir}_MSA_{embedding}*.npz") if "MSA" not in str(f)][0]
+            msa_data_path = list((root / subdir).glob(f"{subdir}_MSA_{embedding}*.npz"))[0]
+            X_lst.append(np.load(dms_data_path)["X"])
+            X_lst.append(np.load(msa_data_path)["X"])
+        X = torch.from_numpy(np.vstack(X_lst)[np.newaxis, :])
+        X = X - X.min()
+        self.X = X / X.max() # TODO: make this a proper torch transform call?
+        Yeast.img_size = (1, self.X.shape[1])
+        self.root = root
+        self.train_data = self.X
+        self.transforms = transforms.Compose(transforms_list)
+        self.logger = logger
+
+    def download(self): # TODO: implement
+        pass
+
+    def __len__(self):
+        return len(self.X)
+
+    def __getitem__(self, idx):
+        embedded_seq = self.X[idx][None,:]
+        seq = self.transforms(embedded_seq)
+        return seq, 0
+
+
+class GFP(DisentangledDataset):
+    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", transforms_list=[], logger=logging.getLogger(__name__)):
+        self.subsets = ["gfp", "d7pm05"]
+        self.embedding = embedding
+        X_lst = []
+        for subdir in self.subsets: # TODO: make MSA or DMS an option for the dataset?
+            dms_data_path = [f for f in (root / subdir).glob(f"{subdir}*{embedding}*.npz") if "MSA" not in str(f)][0]
+            msa_data_path = list((root / subdir).glob(f"{subdir}_MSA_{embedding}*.npz"))[0]
+            X_lst.append(np.load(dms_data_path)["X"])
+            X_lst.append(np.load(msa_data_path)["X"])
+        X = torch.from_numpy(np.vstack(X_lst))
+        X = X - X.min()
+        self.X = X / X.max() # TODO: make this a proper torch transform call?
+        GFP.img_size = (1, self.X.shape[1])
+        self.root = root
+        self.train_data = self.X
+        self.transforms = transforms.Compose(transforms_list)
+        self.logger = logger
+        # TODO: implement self.files? 
+
+    def download(self): # TODO: implement
+        pass
+
+    def __len__(self):
+        return len(self.X)
+    
+    def __getitem__(self, idx):
+        encoded_seq = self.X[idx][None,:]
+        seq = self.transforms(encoded_seq)
+        return seq, 0
 
 
 # HELPERS
