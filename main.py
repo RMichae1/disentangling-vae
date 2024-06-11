@@ -1,20 +1,21 @@
 import argparse
 import logging
-import sys
 import os
+import sys
 from configparser import ConfigParser
 
 from torch import optim
 
-from disvae import init_specific_model, Trainer, Evaluator
-from disvae.utils.modelIO import save_model, load_model, load_metadata
+from disvae import Evaluator, Trainer, init_specific_model
 from disvae.models.losses import LOSSES, RECON_DIST, get_loss_f
 from disvae.models.vae import MODELS
-from utils.datasets import get_dataloaders, get_img_size, DATASETS
-from utils.helpers import (create_safe_directory, get_device, set_seed, get_n_param,
-                           get_config_section, update_namespace_, FormatterNoDuplicate)
+from disvae.utils.modelIO import load_metadata, load_model, save_model
+from utils.datasets import (DATASETS, get_dataloaders, get_img_size,
+                            get_weighted_dataloaders)
+from utils.helpers import (FormatterNoDuplicate, create_safe_directory,
+                           get_config_section, get_device, get_n_param,
+                           set_seed, update_namespace_)
 from utils.visualize import GifTraversalsTraining
-
 
 CONFIG_FILE = "hyperparam.ini"
 RES_DIR = "results"
@@ -61,6 +62,11 @@ def parse_arguments(args_to_parse):
                           help='Save a checkpoint of the trained model every n epoch.')
     training.add_argument('-d', '--dataset', help="Path to training data.",
                           default=default_config['dataset'], choices=DATASETS)
+    training.add_argument('--embedding', type=str, default=None, 
+                        help="Data embedding source",
+                        choices=["esm1b", "esm2", "esm2xs"])
+    training.add_argument("--aggregate", action="store_true",
+                        help="Embedding aggregate across last axis.")
     training.add_argument('-x', '--experiment',
                           default=default_config['experiment'], choices=EXPERIMENTS,
                           help='Predefined experiments to run. If not `custom` this will overwrite some other arguments.')
@@ -72,7 +78,8 @@ def parse_arguments(args_to_parse):
                           help='Batch size for training.')
     training.add_argument('--lr', type=float, default=default_config['lr'],
                           help='Learning rate.')
-
+    training.add_argument('--iw', action='store_true', 
+                          help='importance weighted sampling')
     # Model Options
     model = parser.add_argument_group('Model specfic options')
     model.add_argument('-m', '--model-type',
@@ -90,7 +97,6 @@ def parse_arguments(args_to_parse):
     model.add_argument('-a', '--reg-anneal', type=float,
                        default=default_config['reg_anneal'],
                        help="Number of annealing steps where gradually adding the regularisation. What is annealed is specific to each loss.")
-
     # Loss Specific Options
     betaH = parser.add_argument_group('BetaH specific parameters')
     betaH.add_argument('--betaH-B', type=float,
@@ -194,9 +200,20 @@ def main(args):
             args.epochs *= 2
 
         # PREPARES DATA
-        train_loader = get_dataloaders(args.dataset,
+        if args.iw:
+            train_loader = get_weighted_dataloaders(args.dataset,
                                        batch_size=args.batch_size,
-                                       logger=logger)
+                                       logger=logger,
+                                        embedding=args.embedding, 
+                                        aggregate=args.aggregate,
+                                       )
+        else:
+            train_loader = get_dataloaders(args.dataset,
+                                       batch_size=args.batch_size,
+                                       logger=logger,
+                                        embedding=args.embedding, 
+                                        aggregate=args.aggregate,
+                                       )
         logger.info("Train {} with {} samples".format(args.dataset, len(train_loader.dataset)))
 
         # PREPARES MODEL

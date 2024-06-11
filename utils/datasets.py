@@ -1,20 +1,20 @@
-import subprocess
-import os
 import abc
-import hashlib
-import zipfile
 import glob
+import hashlib
 import logging
+import os
+import subprocess
 import tarfile
+import zipfile
 from pathlib import Path
-from skimage.io import imread
-from PIL import Image
-from tqdm import tqdm
-import numpy as np
 
+import numpy as np
 import torch
-from torch.utils.data import Dataset, DataLoader
-from torchvision import transforms, datasets
+from PIL import Image
+from skimage.io import imread
+from torch.utils.data import DataLoader, Dataset
+from torchvision import datasets, transforms
+from tqdm import tqdm
 
 DIR = os.path.abspath(os.path.dirname(__file__))
 COLOUR_BLACK = 0
@@ -29,14 +29,24 @@ DATASETS_DICT = {"mnist": "MNIST",
 DATASETS = list(DATASETS_DICT.keys())
 
 
-def get_dataset(dataset):
+def get_dataset(dataset, embedding=None, aggregate=False):
     """Return the correct dataset."""
     dataset = dataset.lower()
     try:
         # eval because stores name as string in order to put it at top of file
-        return eval(DATASETS_DICT[dataset])
+        if dataset in ["gfp", "yeast"] and embedding is not None:
+            return eval(DATASETS_DICT[dataset] + f"(embedding='{embedding}', aggregate={aggregate})")
+        else:
+            return eval(DATASETS_DICT[dataset])
     except KeyError:
         raise ValueError("Unkown dataset: {}".format(dataset))
+
+
+def get_weighting(dataset, root=Path.home() / "active-biochem" / "data" / "protein_fitness"):
+    weighting_path = root / dataset / "" # TODO: add weighting path here
+    weighting_vec = np.load(weighting_path) # TODO: access weighting vector
+    # TODO: see weighting by sequence similarity from protein-regression project
+    return weighting_vec
 
 
 def get_img_size(dataset):
@@ -65,7 +75,25 @@ def get_dataloaders(dataset, root=None, shuffle=True, pin_memory=True,
         Additional arguments to `DataLoader`. Default values are modified.
     """
     pin_memory = pin_memory and torch.cuda.is_available  # only pin if GPU available
-    Dataset = get_dataset(dataset)
+    Dataset = get_dataset(dataset, embedding=kwargs.get("embedding"), aggregate=kwargs.get("aggregate"))
+    dataset = Dataset(logger=logger) if root is None else Dataset(root=root, logger=logger)
+    return DataLoader(dataset,
+                      batch_size=batch_size,
+                      shuffle=shuffle,
+                      pin_memory=pin_memory,
+                      **kwargs)
+
+
+def get_weighted_dataloaders(dataset, root=None, shuffle=True, pin_memory=True,
+                    batch_size=128, embedding=None, logger=logging.getLogger(__name__), **kwargs):
+    """
+    A dataloader that samples by provided weights
+    """
+    if dataset.upper() not in ["GFP", "YEAST"]:
+        raise NotImplementedError(f"No weighting available for {dataset}")
+    weighting = get_weighting(dataset)
+    pin_memory = pin_memory and torch.cuda.is_available  # only pin if GPU available
+    Dataset = get_dataset(dataset, embedding=embedding)
     dataset = Dataset(logger=logger) if root is None else Dataset(root=root, logger=logger)
     return DataLoader(dataset,
                       batch_size=batch_size,
@@ -387,16 +415,20 @@ class FashionMNIST(datasets.FashionMNIST):
 
 class Yeast(DisentangledDataset):
     """Proteingym embedded Yeast data wrapper"""
-    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", transforms_list=[], logger=logging.getLogger(__name__)) -> None:
+    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col: str="X", aggregate: bool=False, transforms_list=[], logger=logging.getLogger(__name__)) -> None:
         self.subsets = ["his", "pabp"]
         self.embedding = embedding
         X_lst = []
         for subdir in self.subsets: # TODO: make MSA or DMS an option for the dataset?
-            dms_data_path = [f for f in (root / subdir).glob(f"{subdir}_MSA_{embedding}*.npz") if "MSA" not in str(f)][0]
-            msa_data_path = list((root / subdir).glob(f"{subdir}_MSA_{embedding}*.npz"))[0]
-            X_lst.append(np.load(dms_data_path)["X"])
-            X_lst.append(np.load(msa_data_path)["X"])
+            dms_data_path = [f for f in (root / subdir).glob(f"{subdir}_{embedding}*10000_rep.npz") if "MSA" not in str(f)][0] # NOTE: n10000 is 10k large subset for dev purposes FIXME
+            msa_data_path = list((root / subdir).glob(f"{subdir}_MSA_{embedding}*.npz"))[0] # NOTE: n10000 is 10k large subset for dev purposes FIXME
+            X_lst.append(np.load(dms_data_path)[data_col])
+            X_lst.append(np.load(msa_data_path)[data_col])
         X = torch.from_numpy(np.vstack(X_lst)[np.newaxis, :])
+        if aggregate:
+            if len(X.shape) < 3:
+                raise RuntimeError("Attempted to mean-pool an aggregated ebedding.")
+            X = np.mean(X, axis=-1)
         X = X - X.min()
         self.X = X / X.max() # TODO: make this a proper torch transform call?
         Yeast.img_size = (1, self.X.shape[1])
@@ -418,16 +450,21 @@ class Yeast(DisentangledDataset):
 
 
 class GFP(DisentangledDataset):
-    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", transforms_list=[], logger=logging.getLogger(__name__)):
+    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col="X", aggregate=False, transforms_list=[], logger=logging.getLogger(__name__)):
         self.subsets = ["gfp", "d7pm05"]
         self.embedding = embedding
         X_lst = []
         for subdir in self.subsets: # TODO: make MSA or DMS an option for the dataset?
-            dms_data_path = [f for f in (root / subdir).glob(f"{subdir}*{embedding}*.npz") if "MSA" not in str(f)][0]
+            dms_data_path = [f for f in (root / subdir).glob(f"{subdir}*{embedding}*10000_rep.npz") if "MSA" not in str(f)][0] # NOTE: n10000 is 10k large subset for dev purposes FIXME
             msa_data_path = list((root / subdir).glob(f"{subdir}_MSA_{embedding}*.npz"))[0]
-            X_lst.append(np.load(dms_data_path)["X"])
-            X_lst.append(np.load(msa_data_path)["X"])
+            X_lst.append(np.load(dms_data_path)[data_col])
+            X_lst.append(np.load(msa_data_path)[data_col])
+        if aggregate:
+            if len(X.shape) < 3:
+                raise RuntimeError("Attempted to mean-pool an aggregated ebedding.")
+            X = np.mean(X, axis=-1)
         X = torch.from_numpy(np.vstack(X_lst))
+        # standardize
         X = X - X.min()
         self.X = X / X.max() # TODO: make this a proper torch transform call?
         GFP.img_size = (1, self.X.shape[1])
