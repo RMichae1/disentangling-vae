@@ -2,7 +2,6 @@
 Module containing the decoders.
 """
 import numpy as np
-
 import torch
 from torch import nn
 
@@ -107,25 +106,27 @@ class DecoderSeq(nn.Module):
         super(DecoderSeq, self).__init__()
 
         # Layer parameters
-        hid_channels = 16
+        hid_channels = 128
+        downsample_factor = 2
         kernel_size = 4
         hidden_dim = 256
+        self.conv_in = hid_channels // (2*downsample_factor)
         self.img_size = img_size
         # Shape required to start transpose convs
-        self.reshape = (hid_channels, kernel_size, kernel_size, 10) # TODO: the constant 10 comes from where??
-        n_chan = self.img_size[0]
+        self.reshape = (hid_channels, kernel_size, kernel_size)
+        n_chan = self.img_size[-1]
         self.img_size = img_size
 
         # Fully connected layers
         self.lin1 = nn.Linear(latent_dim, hidden_dim)
         self.lin2 = nn.Linear(hidden_dim, hidden_dim)
-        self.lin3 = nn.Linear(hidden_dim, np.product(self.reshape))
+        self.lin3 = nn.Linear(hidden_dim, self.conv_in*(self.conv_in-2))
 
         # Convolutional layers
         cnn_kwargs = dict(stride=2, padding=1)
        
-        self.convT1 = nn.ConvTranspose1d(hid_channels, hid_channels, kernel_size, **cnn_kwargs)
-        self.convT2 = nn.ConvTranspose1d(hid_channels, hid_channels, kernel_size, **cnn_kwargs)
+        self.convT1 = nn.ConvTranspose1d(self.conv_in, hid_channels//downsample_factor, kernel_size, **cnn_kwargs)
+        self.convT2 = nn.ConvTranspose1d(hid_channels//downsample_factor, hid_channels, kernel_size, **cnn_kwargs)
         self.convT3 = nn.ConvTranspose1d(hid_channels, n_chan, kernel_size, **cnn_kwargs)
 
     def forward(self, z):
@@ -135,13 +136,14 @@ class DecoderSeq(nn.Module):
         x = torch.relu(self.lin1(z))
         x = torch.relu(self.lin2(x))
         x = torch.relu(self.lin3(x))
-        x = x.view(batch_size, self.reshape[0], np.product(self.reshape[1:])) # NOTE: don't reshape unpack as in 2D convolution, 16 channels required
+        x = x.view(batch_size, self.conv_in, -1) # NOTE: don't reshape unpack as in 2D convolution, 16 channels required
 
         # Convolutional layers with ReLu activations
         x = torch.relu(self.convT1(x))
         x = torch.relu(self.convT2(x))
-        # Sigmoid activation for final conv layer
-        x = torch.sigmoid(self.convT3(x))
-
+        # # Sigmoid activation for final conv layer
+        # x = torch.sigmoid(self.convT3(x)) # NOTE: for stability use logits
+        x = self.convT3(x) # NOTE: output logits directly
+        x = x.permute(0, 2, 1) # assert [N, L, D]
         return x
 

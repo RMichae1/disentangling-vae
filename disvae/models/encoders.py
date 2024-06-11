@@ -112,23 +112,25 @@ class EncoderSeq(nn.Module):
         super(EncoderSeq, self).__init__()
 
         # Layer parameters
-        hid_channels = 16
+        hid_channels = 128
+        downsample_factor = 2
         kernel_size = 4
         hidden_dim = 256
+        conv_out = hid_channels//(2*downsample_factor)
         self.latent_dim = latent_dim
         self.img_size = img_size
         # Shape required to start transpose convs
         self.reshape = (hid_channels, kernel_size, kernel_size)
-        n_chan = self.img_size[0]
+        n_chan = self.img_size[-1]
 
         # Convolutional layers
         cnn_kwargs = dict(stride=2, padding=1)
         self.conv1 = nn.Conv1d(n_chan, hid_channels, kernel_size, **cnn_kwargs)
-        self.conv2 = nn.Conv1d(hid_channels, hid_channels, kernel_size, **cnn_kwargs)
-        self.conv3 = nn.Conv1d(hid_channels, hid_channels, kernel_size, **cnn_kwargs)
+        self.conv2 = nn.Conv1d(hid_channels, hid_channels//downsample_factor, kernel_size, **cnn_kwargs)
+        self.conv3 = nn.Conv1d(hid_channels//downsample_factor, conv_out, kernel_size, **cnn_kwargs)
 
         # Fully connected layers
-        self.lin1 = nn.Linear(np.product(self.reshape)*10, hidden_dim) # TODO: where is the constant coming from?
+        self.lin1 = nn.Linear(conv_out*(conv_out-2), hidden_dim) # TODO: where is the constant coming from?
         self.lin2 = nn.Linear(hidden_dim, hidden_dim)
 
         # Fully connected layers for mean and variance
@@ -136,7 +138,7 @@ class EncoderSeq(nn.Module):
 
     def forward(self, x):
         batch_size = x.size(0)
-
+        x = x.permute(0, 2, 1) #  [N, L, D] -> [N, D, L]
         # Convolutional layers with ReLu activations
         x = torch.relu(self.conv1(x))
         x = torch.relu(self.conv2(x))
