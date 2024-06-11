@@ -12,6 +12,7 @@ import numpy as np
 import torch
 from PIL import Image
 from skimage.io import imread
+from sklearn.preprocessing import MinMaxScaler
 from torch.utils.data import DataLoader, Dataset
 from torchvision import datasets, transforms
 from tqdm import tqdm
@@ -29,15 +30,12 @@ DATASETS_DICT = {"mnist": "MNIST",
 DATASETS = list(DATASETS_DICT.keys())
 
 
-def get_dataset(dataset, embedding=None, aggregate=False):
+def get_dataset(dataset):
     """Return the correct dataset."""
     dataset = dataset.lower()
     try:
         # eval because stores name as string in order to put it at top of file
-        if dataset in ["gfp", "yeast"] and embedding is not None:
-            return eval(DATASETS_DICT[dataset] + f"(embedding='{embedding}', aggregate={aggregate})")
-        else:
-            return eval(DATASETS_DICT[dataset])
+        return eval(DATASETS_DICT[dataset])
     except KeyError:
         raise ValueError("Unkown dataset: {}".format(dataset))
 
@@ -75,8 +73,12 @@ def get_dataloaders(dataset, root=None, shuffle=True, pin_memory=True,
         Additional arguments to `DataLoader`. Default values are modified.
     """
     pin_memory = pin_memory and torch.cuda.is_available  # only pin if GPU available
-    Dataset = get_dataset(dataset, embedding=kwargs.get("embedding"), aggregate=kwargs.get("aggregate"))
-    dataset = Dataset(logger=logger) if root is None else Dataset(root=root, logger=logger)
+    Dataset = get_dataset(dataset)
+    if "embedding" in kwargs:
+        dataset = Dataset(logger=logger, embedding=kwargs.pop("embedding"), aggregate=kwargs.pop("aggregate"))
+    else:
+        dataset = Dataset(logger=logger) if root is None else Dataset(root=root, logger=logger)
+
     return DataLoader(dataset,
                       batch_size=batch_size,
                       shuffle=shuffle,
@@ -451,23 +453,30 @@ class Yeast(DisentangledDataset):
 
 class GFP(DisentangledDataset):
     def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col="X", aggregate=False, transforms_list=[], logger=logging.getLogger(__name__)):
-        self.subsets = ["gfp", "d7pm05"]
+        self.subsets = ["gfp"] #, "d7pm05"]# TODO: fixme, disabled for dev
+        self.scaler = MinMaxScaler()
         self.embedding = embedding
         X_lst = []
         for subdir in self.subsets: # TODO: make MSA or DMS an option for the dataset?
             dms_data_path = [f for f in (root / subdir).glob(f"{subdir}*{embedding}*10000_rep.npz") if "MSA" not in str(f)][0] # NOTE: n10000 is 10k large subset for dev purposes FIXME
-            msa_data_path = list((root / subdir).glob(f"{subdir}_MSA_{embedding}*.npz"))[0]
+            msa_data_path = list((root / subdir).glob(f"{subdir}_{embedding}_MSA*.npz"))[0]
             X_lst.append(np.load(dms_data_path)[data_col])
             X_lst.append(np.load(msa_data_path)[data_col])
         if aggregate:
             if len(X.shape) < 3:
                 raise RuntimeError("Attempted to mean-pool an aggregated ebedding.")
             X = np.mean(X, axis=-1)
-        X = torch.from_numpy(np.vstack(X_lst))
-        # standardize
-        X = X - X.min()
-        self.X = X / X.max() # TODO: make this a proper torch transform call?
-        GFP.img_size = (1, self.X.shape[1])
+        X_matrix = np.vstack(X_lst)
+        if len(X_matrix.shape) == 3:
+            self.scaler_across_l = {f"sc_{l}": MinMaxScaler() for l in range(X_matrix.shape[1])}
+        norm_X = []
+        for col in range(X_matrix.shape[1]):
+            normalized_col = self.scaler_across_l[f"sc_{col}"].fit_transform(X_matrix[:,col])
+            normalized_col = normalized_col[:, None]
+            norm_X.append(normalized_col)
+        X_matrix = np.concatenate(norm_X, axis=1) # standardize each dimension independently # TODO: is this correct?
+        self.X = torch.from_numpy(X_matrix)
+        GFP.img_size = (self.X.shape[1], self.X.shape[2])
         self.root = root
         self.train_data = self.X
         self.transforms = transforms.Compose(transforms_list)
@@ -481,7 +490,7 @@ class GFP(DisentangledDataset):
         return len(self.X)
     
     def __getitem__(self, idx):
-        encoded_seq = self.X[idx][None,:]
+        encoded_seq = self.X[idx]
         seq = self.transforms(encoded_seq)
         return seq, 0
 
