@@ -6,13 +6,14 @@ import math
 
 import torch
 import torch.nn as nn
-from torch.nn import functional as F
 from torch import optim
+from torch.nn import functional as F
 
-from .discriminator import Discriminator
-from disvae.utils.math import (log_density_gaussian, log_importance_weight_matrix,
+from disvae.utils.math import (log_density_gaussian,
+                               log_importance_weight_matrix,
                                matrix_log_density_gaussian)
 
+from .discriminator import Discriminator
 
 LOSSES = ["VAE", "betaH", "betaB", "factor", "btcvae"]
 RECON_DIST = ["bernoulli", "laplace", "gaussian"]
@@ -430,7 +431,8 @@ def _reconstruction_loss(data, recon_data, distribution="bernoulli", storer=None
     is_colored = n_chan == 3
 
     if distribution == "bernoulli":
-        loss = F.binary_cross_entropy(recon_data, data, reduction="sum")
+        # loss = F.binary_cross_entropy(recon_data, data, reduction="sum") # use logit computation for stability instead
+        loss = F.binary_cross_entropy_with_logits(recon_data, data, reduction="sum")
     elif distribution == "gaussian":
         # loss in [0,255] space but normalized by 255 to not be too big
         loss = F.mse_loss(recon_data * 255, data * 255, reduction="sum") / 255
