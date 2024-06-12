@@ -418,7 +418,7 @@ class FashionMNIST(datasets.FashionMNIST):
 class Yeast(DisentangledDataset):
     """Proteingym embedded Yeast data wrapper"""
     def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col: str="X", aggregate: bool=False, transforms_list=[], logger=logging.getLogger(__name__)) -> None:
-        self.subsets = ["his", "pabp"]
+        self.subsets = ["his7", "pabp"]
         self.embedding = embedding
         X_lst = []
         for subdir in self.subsets: # TODO: make MSA or DMS an option for the dataset?
