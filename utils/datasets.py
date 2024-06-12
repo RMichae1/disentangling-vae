@@ -453,7 +453,7 @@ class Yeast(DisentangledDataset):
 
 class GFP(DisentangledDataset):
     def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col="X", aggregate=False, transforms_list=[], scale_eps=1e-6, logger=logging.getLogger(__name__)):
-        self.subsets = ["gfp"] #, "d7pm05"]# TODO: fixme, disabled for dev
+        self.subsets = ["gfp", "d7pm05"]
         self.scaler = MinMaxScaler()
         self.embedding = embedding
         X_lst = []
