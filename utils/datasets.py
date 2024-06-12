@@ -417,8 +417,8 @@ class FashionMNIST(datasets.FashionMNIST):
 
 class Yeast(DisentangledDataset):
     """Proteingym embedded Yeast data wrapper"""
-    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col: str="X", aggregate: bool=False, subset="his7", transforms_list=[], logger=logging.getLogger(__name__)) -> None:
-        self.subsets = ["his7", "pabp"]
+    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col: str="X", aggregate: bool=False, subset="his7", scale_eps=1e-6, transforms_list=[], logger=logging.getLogger(__name__)) -> None:
+        self.subsets = ["his7", "pabp"] # TODO: combine both datasets for combined embedding
         if subset:
             assert subset in self.subsets
             self.subsets = [subset]
@@ -427,16 +427,30 @@ class Yeast(DisentangledDataset):
         for subdir in self.subsets: # TODO: make MSA or DMS an option for the dataset?
             dms_data_path = [f for f in (root / subdir).glob(f"{subdir}_{embedding}*10000_rep.npz") if "MSA" not in str(f)][0] # NOTE: n10000 is 10k large subset for dev purposes FIXME
             msa_data_path = list((root / subdir).glob(f"{subdir}_MSA_{embedding}*.npz"))[0] # NOTE: n10000 is 10k large subset for dev purposes FIXME
-            X_lst.append(np.load(dms_data_path)[data_col])
-            X_lst.append(np.load(msa_data_path)[data_col])
-        X = torch.from_numpy(np.vstack(X_lst)[np.newaxis, :])
-        if aggregate:
-            if len(X.shape) < 3:
-                raise RuntimeError("Attempted to mean-pool an aggregated ebedding.")
-            X = np.mean(X, axis=-1)
-        X = X - X.min()
-        self.X = X / X.max() # TODO: make this a proper torch transform call?
-        Yeast.img_size = (1, self.X.shape[1])
+            X_dms = np.load(dms_data_path)[data_col]
+            X_msa = np.load(msa_data_path)[data_col]
+            if aggregate:
+                if len(X_dms.shape) < 3 or len(X_msa.shape) < 3:
+                    raise RuntimeError("Attempted to mean-pool an aggregated ebedding.")
+                X_dms = np.mean(X_dms, axis=1) # NOTE: mean-pool across sequence length
+                X_msa = np.mean(X_msa, axis=1) # NOTE: mean-pool across sequence length
+            X_lst.append(X_dms)
+            X_lst.append(X_msa)
+        X_matrix = np.vstack(X_lst)
+        if len(X_matrix.shape) == 3:
+            self.scaler = {f"sc_{l}": MinMaxScaler((0+scale_eps, 1-scale_eps)) for l in range(X_matrix.shape[1])}
+            norm_X = []
+            for col in range(X_matrix.shape[1]):
+                normalized_col = self.scaler[f"sc_{col}"].fit_transform(X_matrix[:,col])
+                normalized_col = normalized_col[:, None]
+                norm_X.append(normalized_col)
+            X_matrix = np.concatenate(norm_X, axis=1) # standardize each dimension independently # TODO: correct?
+        else:
+            self.scaler = MinMaxScaler((0+scale_eps, 1-scale_eps))
+            X_matrix = self.scaler.fit_transform(X_matrix)
+            X_matrix = X_matrix[:, :, None] # add dimension
+        self.X = torch.from_numpy(X_matrix)
+        Yeast.img_size = (self.X.shape[1], self.X.shape[2])
         self.root = root
         self.train_data = self.X
         self.transforms = transforms.Compose(transforms_list)
