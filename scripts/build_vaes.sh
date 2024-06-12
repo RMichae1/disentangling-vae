@@ -28,20 +28,20 @@ embedding=$(awk -v ArrayID=${SLURM_ARRAY_TASK_ID} '$1==ArrayID {print $4}' ${CON
 latent_dim=$(awk -v ArrayID=${SLURM_ARRAY_TASK_ID} '$1==ArrayID {print $5}' ${CONFIG})
 aggregate=$(awk -v ArrayID=${SLURM_ARRAY_TASK_ID} '$1==ArrayID {print $6}' ${CONFIG})
 rec_dist=$(awk -v ArrayID=${SLURM_ARRAY_TASK_ID} '$1==ArrayID {print $7}' ${CONFIG})
+subset=$(awk -v ArrayID=${SLURM_ARRAY_TASK_ID} '$1==ArrayID {print $8}' ${CONFIG})
 
-vae_type="${loss}_${dataset}_${embedding}_${latent_dim}"
+vae_type="${loss}_${dataset}_${embedding}_${latent_dim}_${subset}"
 
 cd ${PROJECT_DIR}  # required to be run from here due to relative experiment config paths in repo,
 
 
 if [[ "${aggregate}" == "True" ]]; then
-
     vae_type="${vae_type}_meanpooled"
-    echo "python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100 --aggregate"
-    python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100 --aggregate
+    echo "python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} --subset ${subset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100 --aggregate"
+    python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} --subset ${subset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100 --aggregate
     exit 0
 else 
-    echo "python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100"
-    python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100
+    echo "python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} --subset ${subset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100"
+    python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} --subset ${subset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100
     exit 0
 fi
