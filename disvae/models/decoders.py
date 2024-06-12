@@ -116,11 +116,12 @@ class DecoderSeq(nn.Module):
         self.reshape = (hid_channels, kernel_size, kernel_size)
         n_chan = self.img_size[-1]
         self.img_size = img_size
+        multiple_dim = int(n_chan != 1)
 
         # Fully connected layers
         self.lin1 = nn.Linear(latent_dim, hidden_dim)
         self.lin2 = nn.Linear(hidden_dim, hidden_dim)
-        self.lin3 = nn.Linear(hidden_dim, self.conv_in*(self.conv_in-2))
+        self.lin3 = nn.Linear(hidden_dim, self.conv_in*(kernel_size-multiple_dim)*10)
 
         # Convolutional layers
         cnn_kwargs = dict(stride=2, padding=1)
@@ -142,8 +143,8 @@ class DecoderSeq(nn.Module):
         x = torch.relu(self.convT1(x))
         x = torch.relu(self.convT2(x))
         # # Sigmoid activation for final conv layer
-        # x = torch.sigmoid(self.convT3(x)) # NOTE: for stability use logits
-        x = self.convT3(x) # NOTE: output logits directly
+        x = torch.sigmoid(self.convT3(x))
+        # x = self.convT3(x) # NOTE: for stability use logits
         x = x.permute(0, 2, 1) # assert [N, L, D]
         return x
 

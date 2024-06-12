@@ -122,6 +122,7 @@ class EncoderSeq(nn.Module):
         # Shape required to start transpose convs
         self.reshape = (hid_channels, kernel_size, kernel_size)
         n_chan = self.img_size[-1]
+        multiple_dim = int(n_chan != 1)
 
         # Convolutional layers
         cnn_kwargs = dict(stride=2, padding=1)
@@ -130,7 +131,7 @@ class EncoderSeq(nn.Module):
         self.conv3 = nn.Conv1d(hid_channels//downsample_factor, conv_out, kernel_size, **cnn_kwargs)
 
         # Fully connected layers
-        self.lin1 = nn.Linear(conv_out*(conv_out-2), hidden_dim) # TODO: where is the constant coming from?
+        self.lin1 = nn.Linear(self.conv3.out_channels*(kernel_size-multiple_dim)*10, hidden_dim)
         self.lin2 = nn.Linear(hidden_dim, hidden_dim)
 
         # Fully connected layers for mean and variance
