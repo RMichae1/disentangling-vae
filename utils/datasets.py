@@ -75,7 +75,7 @@ def get_dataloaders(dataset, root=None, shuffle=True, pin_memory=True,
     pin_memory = pin_memory and torch.cuda.is_available  # only pin if GPU available
     Dataset = get_dataset(dataset)
     if "embedding" in kwargs:
-        dataset = Dataset(logger=logger, embedding=kwargs.pop("embedding"), aggregate=kwargs.pop("aggregate"))
+        dataset = Dataset(logger=logger, embedding=kwargs.pop("embedding"), aggregate=kwargs.pop("aggregate"), subset=kwargs.pop("subset"))
     else:
         dataset = Dataset(logger=logger) if root is None else Dataset(root=root, logger=logger)
 
@@ -417,8 +417,11 @@ class FashionMNIST(datasets.FashionMNIST):
 
 class Yeast(DisentangledDataset):
     """Proteingym embedded Yeast data wrapper"""
-    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col: str="X", aggregate: bool=False, transforms_list=[], logger=logging.getLogger(__name__)) -> None:
+    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col: str="X", aggregate: bool=False, subset="his7", transforms_list=[], logger=logging.getLogger(__name__)) -> None:
         self.subsets = ["his7", "pabp"]
+        if subset:
+            assert subset in self.subsets
+            self.subsets = [subset]
         self.embedding = embedding
         X_lst = []
         for subdir in self.subsets: # TODO: make MSA or DMS an option for the dataset?
@@ -452,8 +455,11 @@ class Yeast(DisentangledDataset):
 
 
 class GFP(DisentangledDataset):
-    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col="X", aggregate=False, transforms_list=[], scale_eps=1e-6, logger=logging.getLogger(__name__)):
+    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col="X", aggregate=False, subset="gfp", transforms_list=[], scale_eps=1e-6, logger=logging.getLogger(__name__)):
         self.subsets = ["gfp", "d7pm05"]
+        if subset:
+            assert subset in self.subsets
+            self.subsets = [subset]
         self.scaler = MinMaxScaler()
         self.embedding = embedding
         X_lst = []

@@ -62,6 +62,8 @@ def parse_arguments(args_to_parse):
                           help='Save a checkpoint of the trained model every n epoch.')
     training.add_argument('-d', '--dataset', help="Path to training data.",
                           default=default_config['dataset'], choices=DATASETS)
+    training.add_argument('--subset', help="subset of dataset.",
+                        choices=["gfp", "his7", "pabp", "d7pm05"])
     training.add_argument('--embedding', type=str, default=None, 
                         help="Data embedding source",
                         choices=["esm1b", "esm2", "esm2xs"])
@@ -213,6 +215,7 @@ def main(args):
                                        logger=logger,
                                         embedding=args.embedding, 
                                         aggregate=args.aggregate,
+                                        subset=args.subset,
                                        )
         logger.info("Train {} with {} samples".format(args.dataset, len(train_loader.dataset)))
 
@@ -251,6 +254,7 @@ def main(args):
                                       batch_size=args.eval_batchsize,
                                       shuffle=False,
                                       embedding=args.embedding, 
+                                      subset=args.subset,
                                       aggregate=args.aggregate,
                                       logger=logger)
         loss_f = get_loss_f(args.loss,
