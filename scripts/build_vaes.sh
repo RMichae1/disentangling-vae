@@ -34,14 +34,26 @@ vae_type="${loss}_${dataset}_${embedding}_${latent_dim}_${subset}"
 
 cd ${PROJECT_DIR}  # required to be run from here due to relative experiment config paths in repo,
 
-
-if [[ "${aggregate}" == "True" ]]; then
-    vae_type="${vae_type}_meanpooled"
-    echo "python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} --subset ${subset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100 --aggregate"
-    python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} --subset ${subset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100 --aggregate
-    exit 0
-else 
-    echo "python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} --subset ${subset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100"
-    python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} --subset ${subset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100
-    exit 0
+if [ -z ${subset} ]; then
+    if [[ "${aggregate}" == "True" ]]; then
+        vae_type="${vae_type}_meanpooled"
+        echo "python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100 --aggregate"
+        python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100 --aggregate
+        exit 0
+    else 
+        echo "python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100"
+        python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100
+        exit 0
+    fi
+else
+    if [[ "${aggregate}" == "True" ]]; then
+        vae_type="${vae_type}_meanpooled"
+        echo "python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} --subset ${subset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100 --aggregate"
+        python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} --subset ${subset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100 --aggregate
+        exit 0
+    else 
+        echo "python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} --subset ${subset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100"
+        python ${PROJECT_DIR}main.py ${vae_type} -d ${dataset} --subset ${subset} -m Seq --embedding ${embedding} -z ${latent_dim} -l ${loss} -r ${rec_dist} --lr 0.001 -b 256 -e 100
+        exit 0
+    fi
 fi
