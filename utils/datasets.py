@@ -452,7 +452,7 @@ class Yeast(DisentangledDataset):
 
 
 class GFP(DisentangledDataset):
-    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col="X", aggregate=False, transforms_list=[], logger=logging.getLogger(__name__)):
+    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col="X", aggregate=False, transforms_list=[], scale_eps=1e-6, logger=logging.getLogger(__name__)):
         self.subsets = ["gfp"] #, "d7pm05"]# TODO: fixme, disabled for dev
         self.scaler = MinMaxScaler()
         self.embedding = embedding
@@ -462,19 +462,23 @@ class GFP(DisentangledDataset):
             msa_data_path = list((root / subdir).glob(f"{subdir}_{embedding}_MSA*.npz"))[0]
             X_lst.append(np.load(dms_data_path)[data_col])
             X_lst.append(np.load(msa_data_path)[data_col])
-        if aggregate:
-            if len(X.shape) < 3:
-                raise RuntimeError("Attempted to mean-pool an aggregated ebedding.")
-            X = np.mean(X, axis=-1)
         X_matrix = np.vstack(X_lst)
+        if aggregate:
+            if len(X_matrix.shape) < 3:
+                raise RuntimeError("Attempted to mean-pool an aggregated ebedding.")
+            X_matrix = np.mean(X_matrix, axis=1) # NOTE: mean-pool across sequence length
         if len(X_matrix.shape) == 3:
-            self.scaler_across_l = {f"sc_{l}": MinMaxScaler() for l in range(X_matrix.shape[1])}
-        norm_X = []
-        for col in range(X_matrix.shape[1]):
-            normalized_col = self.scaler_across_l[f"sc_{col}"].fit_transform(X_matrix[:,col])
-            normalized_col = normalized_col[:, None]
-            norm_X.append(normalized_col)
-        X_matrix = np.concatenate(norm_X, axis=1) # standardize each dimension independently # TODO: is this correct?
+            self.scaler = {f"sc_{l}": MinMaxScaler((0+scale_eps, 1-scale_eps)) for l in range(X_matrix.shape[1])}
+            norm_X = []
+            for col in range(X_matrix.shape[1]):
+                normalized_col = self.scaler[f"sc_{col}"].fit_transform(X_matrix[:,col])
+                normalized_col = normalized_col[:, None]
+                norm_X.append(normalized_col)
+            X_matrix = np.concatenate(norm_X, axis=1) # standardize each dimension independently # TODO: correct?
+        else:
+            self.scaler = MinMaxScaler((0+scale_eps, 1-scale_eps))
+            X_matrix = self.scaler.fit_transform(X_matrix)
+            X_matrix = X_matrix[:, :, None] # add dimension
         self.X = torch.from_numpy(X_matrix)
         GFP.img_size = (self.X.shape[1], self.X.shape[2])
         self.root = root
