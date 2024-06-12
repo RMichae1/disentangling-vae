@@ -417,7 +417,7 @@ class FashionMNIST(datasets.FashionMNIST):
 
 class Yeast(DisentangledDataset):
     """Proteingym embedded Yeast data wrapper"""
-    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col: str="X", aggregate: bool=False, subset="his7", scale_eps=1e-6, transforms_list=[], logger=logging.getLogger(__name__)) -> None:
+    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col: str="X", aggregate: bool=False, subset=None, scale_eps=1e-6, transforms_list=[], logger=logging.getLogger(__name__)) -> None:
         self.subsets = ["his7", "pabp"] # TODO: combine both datasets for combined embedding
         if subset:
             assert subset in self.subsets
@@ -469,7 +469,7 @@ class Yeast(DisentangledDataset):
 
 
 class GFP(DisentangledDataset):
-    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col="X", aggregate=False, subset="gfp", transforms_list=[], scale_eps=1e-6, logger=logging.getLogger(__name__)):
+    def __init__(self, root=Path.home() / "active-biochem" / "data" / "protein_fitness", embedding: str="esm1b", data_col="X", aggregate=False, subset=None, transforms_list=[], scale_eps=1e-6, logger=logging.getLogger(__name__)):
         self.subsets = ["gfp", "d7pm05"]
         if subset:
             assert subset in self.subsets

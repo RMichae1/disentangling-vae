@@ -62,7 +62,7 @@ def parse_arguments(args_to_parse):
                           help='Save a checkpoint of the trained model every n epoch.')
     training.add_argument('-d', '--dataset', help="Path to training data.",
                           default=default_config['dataset'], choices=DATASETS)
-    training.add_argument('--subset', help="subset of dataset.",
+    training.add_argument('--subset', help="subset of dataset.", default=None,
                         choices=["gfp", "his7", "pabp", "d7pm05"])
     training.add_argument('--embedding', type=str, default=None, 
                         help="Data embedding source",
@@ -208,6 +208,7 @@ def main(args):
                                        logger=logger,
                                         embedding=args.embedding, 
                                         aggregate=args.aggregate,
+                                        subset=args.subset,
                                        )
         else:
             train_loader = get_dataloaders(args.dataset,
