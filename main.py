@@ -250,6 +250,8 @@ def main(args):
         test_loader = get_dataloaders(metadata["dataset"],
                                       batch_size=args.eval_batchsize,
                                       shuffle=False,
+                                      embedding=args.embedding, 
+                                      aggregate=args.aggregate,
                                       logger=logger)
         loss_f = get_loss_f(args.loss,
                             n_data=len(test_loader.dataset),
