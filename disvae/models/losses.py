@@ -431,11 +431,12 @@ def _reconstruction_loss(data, recon_data, distribution="bernoulli", storer=None
     is_colored = n_chan == 3
 
     if distribution == "bernoulli":
-        # loss = F.binary_cross_entropy(recon_data, data, reduction="sum") # use logit computation for stability instead
-        loss = F.binary_cross_entropy_with_logits(recon_data, data, reduction="sum")
+        loss = F.binary_cross_entropy(recon_data, data, reduction="sum") 
+        # loss = F.binary_cross_entropy_with_logits(recon_data, data, reduction="sum") # consider using logit computation for stability instead
     elif distribution == "gaussian":
         # loss in [0,255] space but normalized by 255 to not be too big
-        loss = F.mse_loss(recon_data * 255, data * 255, reduction="sum") / 255
+        # loss = F.mse_loss(recon_data * 255, data * 255, reduction="sum") / 255 
+        loss = F.mse_loss(recon_data, data, reduction="sum") # NOTE: [0, 1] space not pixel space
     elif distribution == "laplace":
         # loss in [0,255] space but normalized by 255 to not be too big but
         # multiply by 255 and divide 255, is the same as not doing anything for L1
