@@ -480,13 +480,16 @@ class GFP(DisentangledDataset):
         for subdir in self.subsets: # TODO: make MSA or DMS an option for the dataset?
             dms_data_path = [f for f in (root / subdir).glob(f"{subdir}*{embedding}*10000_rep.npz") if "MSA" not in str(f)][0] # NOTE: n10000 is 10k large subset for dev purposes FIXME
             msa_data_path = list((root / subdir).glob(f"{subdir}_{embedding}_MSA*.npz"))[0]
-            X_lst.append(np.load(dms_data_path)[data_col])
-            X_lst.append(np.load(msa_data_path)[data_col])
+            X_dms = np.load(dms_data_path)[data_col]
+            X_msa = np.load(msa_data_path)[data_col]
+            if aggregate:
+                if len(X_dms.shape) < 3 or len(X_msa.shape) < 3:
+                    raise RuntimeError("Attempted to mean-pool an aggregated ebedding.")
+                X_dms = np.mean(X_dms, axis=1) # NOTE: mean-pool across sequence length
+                X_msa = np.mean(X_msa, axis=1) # NOTE: mean-pool across sequence length
+            X_lst.append(X_dms)
+            X_lst.append(X_msa)
         X_matrix = np.vstack(X_lst)
-        if aggregate:
-            if len(X_matrix.shape) < 3:
-                raise RuntimeError("Attempted to mean-pool an aggregated ebedding.")
-            X_matrix = np.mean(X_matrix, axis=1) # NOTE: mean-pool across sequence length
         if len(X_matrix.shape) == 3:
             self.scaler = {f"sc_{l}": MinMaxScaler((0+scale_eps, 1-scale_eps)) for l in range(X_matrix.shape[1])}
             norm_X = []
