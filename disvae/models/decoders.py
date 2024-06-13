@@ -115,16 +115,21 @@ class DecoderSeq(nn.Module):
         # Shape required to start transpose convs
         self.reshape = (hid_channels, kernel_size, kernel_size)
         n_chan = self.img_size[-1]
+        L_in = self.img_size[0]
         self.img_size = img_size
-        multiple_dim = int(n_chan != 1)
+
+        # Convolutional specs
+        cnn_kwargs = dict(stride=2, padding=1, dilation=1)
+        def conv_output_size(L_in, kernel_size, stride=1, padding=0, dilation=1):
+            return (L_in + 2*padding - dilation*(kernel_size - 1) - 1) // stride + 1
+        L_out1 = conv_output_size(L_in, kernel_size, **cnn_kwargs)
+        L_out2 = conv_output_size(L_out1, kernel_size, **cnn_kwargs)
+        L_out3 = conv_output_size(L_out2, kernel_size, **cnn_kwargs)
 
         # Fully connected layers
         self.lin1 = nn.Linear(latent_dim, hidden_dim)
         self.lin2 = nn.Linear(hidden_dim, hidden_dim)
-        self.lin3 = nn.Linear(hidden_dim, self.conv_in*(kernel_size-multiple_dim)*10)
-
-        # Convolutional layers
-        cnn_kwargs = dict(stride=2, padding=1)
+        self.lin3 = nn.Linear(hidden_dim, self.conv_in*L_out3)
        
         self.convT1 = nn.ConvTranspose1d(self.conv_in, hid_channels//downsample_factor, kernel_size, **cnn_kwargs)
         self.convT2 = nn.ConvTranspose1d(hid_channels//downsample_factor, hid_channels, kernel_size, **cnn_kwargs)

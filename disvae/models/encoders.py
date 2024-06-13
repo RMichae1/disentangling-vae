@@ -2,7 +2,6 @@
 Module containing the encoders.
 """
 import numpy as np
-
 import torch
 from torch import nn
 
@@ -122,16 +121,23 @@ class EncoderSeq(nn.Module):
         # Shape required to start transpose convs
         self.reshape = (hid_channels, kernel_size, kernel_size)
         n_chan = self.img_size[-1]
-        multiple_dim = int(n_chan != 1)
+        L_in = self.img_size[0]
 
         # Convolutional layers
-        cnn_kwargs = dict(stride=2, padding=1)
+        cnn_kwargs = dict(stride=2, padding=1, dilation=1)
+        # Compute the output size after the convolutions
+        def conv_output_size(L_in, kernel_size, stride=1, padding=0, dilation=1):
+            return (L_in + 2*padding - dilation*(kernel_size - 1) - 1) // stride + 1
+        L_out1 = conv_output_size(L_in, kernel_size, **cnn_kwargs)
+        L_out2 = conv_output_size(L_out1, kernel_size, **cnn_kwargs)
+        L_out3 = conv_output_size(L_out2, kernel_size, **cnn_kwargs)
         self.conv1 = nn.Conv1d(n_chan, hid_channels, kernel_size, **cnn_kwargs)
         self.conv2 = nn.Conv1d(hid_channels, hid_channels//downsample_factor, kernel_size, **cnn_kwargs)
         self.conv3 = nn.Conv1d(hid_channels//downsample_factor, conv_out, kernel_size, **cnn_kwargs)
 
         # Fully connected layers
-        self.lin1 = nn.Linear(self.conv3.out_channels*(kernel_size-multiple_dim)*10, hidden_dim)
+        # propose: L_out + img_size[0]
+        self.lin1 = nn.Linear(conv_out*L_out3, hidden_dim)
         self.lin2 = nn.Linear(hidden_dim, hidden_dim)
 
         # Fully connected layers for mean and variance
