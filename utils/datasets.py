@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 import torch
 from PIL import Image
-from skimage.io import imread
+# from skimage.io import imread
 from sklearn.preprocessing import MinMaxScaler
 from torch.utils.data import DataLoader, Dataset
 from torchvision import datasets, transforms

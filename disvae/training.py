@@ -1,15 +1,13 @@
-import imageio
 import logging
 import os
-from timeit import default_timer
 from collections import defaultdict
+from timeit import default_timer
 
-from tqdm import trange
 import torch
 from torch.nn import functional as F
+from tqdm import trange
 
 from disvae.utils.modelIO import save_model
-
 
 TRAIN_LOSSES_LOGFILE = "train_losses.log"
 
