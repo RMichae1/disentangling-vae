@@ -425,7 +425,7 @@ class Yeast(DisentangledDataset):
         self.embedding = embedding
         X_lst = []
         for subdir in self.subsets: # TODO: make MSA or DMS an option for the dataset?
-            dms_data_path = [f for f in (root / subdir).glob(f"{subdir}_{embedding}*10000_rep.npz") if "MSA" not in str(f)][0] # NOTE: n10000 is 10k large subset for dev purposes FIXME
+            dms_data_path = [f for f in (root / subdir).glob(f"{subdir}_{embedding}_*10000_rep.npz") if "MSA" not in str(f)][0] # NOTE: n10000 is 10k large subset for dev purposes FIXME
             msa_data_path = list((root / subdir).glob(f"{subdir}_{embedding}_MSA*.npz"))[0] # NOTE: n10000 is 10k large subset for dev purposes FIXME
             X_dms = np.load(dms_data_path)[data_col]
             X_msa = np.load(msa_data_path)[data_col]
@@ -478,7 +478,7 @@ class GFP(DisentangledDataset):
         self.embedding = embedding
         X_lst = []
         for subdir in self.subsets: # TODO: make MSA or DMS an option for the dataset?
-            dms_data_path = [f for f in (root / subdir).glob(f"{subdir}*{embedding}*10000_rep.npz") if "MSA" not in str(f)][0] # NOTE: n10000 is 10k large subset for dev purposes FIXME
+            dms_data_path = [f for f in (root / subdir).glob(f"{subdir}_{embedding}_*10000_rep.npz") if "MSA" not in str(f)][0] # NOTE: n10000 is 10k large subset for dev purposes FIXME
             msa_data_path = list((root / subdir).glob(f"{subdir}_{embedding}_MSA*.npz"))[0]
             X_dms = np.load(dms_data_path)[data_col]
             X_msa = np.load(msa_data_path)[data_col]
