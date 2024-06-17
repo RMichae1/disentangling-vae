@@ -153,3 +153,51 @@ class DecoderSeq(nn.Module):
         x = x.permute(0, 2, 1) # assert [N, L, D]
         return x
 
+
+class DecoderSeqpooled(nn.Module):
+    def __init__(self, img_size,
+                 latent_dim=10):
+        r"""Decoder of the model
+
+        Parameters
+        ----------
+        img_size : tuple of ints
+            Size of pooled embedded sequences. E.g. (1, D) or others.
+
+        latent_dim : int
+            Dimensionality of latent output.
+
+        Model Architecture (transposed for decoder)
+        ------------
+        - 2 fully connected layers (each of 256 units)
+        - Latent distribution:
+            - 1 fully connected layer of 20 units (log variance and mean for 10 Gaussians)
+        """
+        super(DecoderSeqpooled, self).__init__()
+
+        # Layer parameters
+        hidden_dim = 256
+        self.img_size = img_size
+        # Shape required to start transpose convs
+        n_chan = self.img_size[-1]
+        L_in = self.img_size[0]
+        self.img_size = img_size
+
+        # Fully connected layers
+        self.lin1 = nn.Linear(latent_dim, hidden_dim)
+        self.lin2 = nn.Linear(hidden_dim, hidden_dim)
+        self.lin3 = nn.Linear(hidden_dim, L_in)
+
+
+    def forward(self, z):
+        batch_size = z.size(0)
+
+        # Fully connected layers with ReLu activations
+        x = torch.relu(self.lin1(z))
+        x = torch.relu(self.lin2(x))
+        x = torch.sigmoid(self.lin3(x))
+        x = x.reshape(batch_size, self.img_size[0], 1)
+
+        return x
+
+

@@ -96,7 +96,7 @@ class EncoderSeq(nn.Module):
         Parameters
         ----------
         img_size : tuple of ints
-            Size of sequences. E.g. (1, 1028) or (1, 2056).
+            Size of sequences length times embedding dimensions. E.g. (L, 1028) or (L, 2056).
 
         latent_dim : int
             Dimensionality of latent output.
@@ -162,4 +162,58 @@ class EncoderSeq(nn.Module):
         mu, logvar = mu_logvar.view(-1, self.latent_dim, 2).unbind(-1)
 
         return mu, logvar
+
+
+class EncoderSeqpooled(nn.Module):
+    def __init__(self, img_size,
+                 latent_dim=10):
+        r"""Encoder of the model proposed in [1].
+
+        Parameters
+        ----------
+        img_size : tuple of ints
+            Size of pooled embedded sequences. E.g. (1, 1028) or (1, 2056).
+
+        latent_dim : int
+            Dimensionality of latent output.
+
+        Model Architecture (transposed for decoder)
+        ------------
+        - 2 fully connected layers (each of 256 units)
+        - Latent distribution:
+            - 1 fully connected layer of 20 units (log variance and mean for 10 Gaussians)
+        """
+        super(EncoderSeqpooled, self).__init__()
+
+        # Layer parameters
+        hidden_dim = 256
+        self.latent_dim = latent_dim
+        self.img_size = img_size
+        # Shape required to start transpose convs
+        n_chan = self.img_size[-1]
+        L_in = self.img_size[0]
+
+        # Fully connected layers
+        # propose: L_out + img_size[0]
+        self.lin1 = nn.Linear(L_in, hidden_dim)
+        self.lin2 = nn.Linear(hidden_dim, hidden_dim)
+
+        # Fully connected layers for mean and variance
+        self.mu_logvar_gen = nn.Linear(hidden_dim, self.latent_dim * 2)
+
+    def forward(self, x):
+        batch_size = x.size(0)
+
+        # Fully connected layers with ReLu activations
+        x = x.view((batch_size, -1))
+        x = torch.relu(self.lin1(x))
+        x = torch.relu(self.lin2(x))
+
+        # Fully connected layer for log variance and mean
+        # Log std-dev in paper (bear in mind)
+        mu_logvar = self.mu_logvar_gen(x)
+        mu, logvar = mu_logvar.view(-1, self.latent_dim, 2).unbind(-1)
+
+        return mu, logvar
+
 
