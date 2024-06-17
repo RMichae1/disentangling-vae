@@ -64,11 +64,11 @@ def parse_arguments(args_to_parse):
                           default=default_config['dataset'], choices=DATASETS)
     training.add_argument('--subset', help="subset of dataset.", default=None,
                         choices=["gfp", "his7", "pabp", "d7pm05"])
+    training.add_argument('--msa_only', action="store_true",
+                        help="Train only on MSA data.")
     training.add_argument('--embedding', type=str, default=None, 
                         help="Data embedding source",
                         choices=["esm1b", "esm2", "esm2xs"])
-    training.add_argument("--aggregate", action="store_true",
-                        help="Embedding aggregate across last axis.")
     training.add_argument('-x', '--experiment',
                           default=default_config['experiment'], choices=EXPERIMENTS,
                           help='Predefined experiments to run. If not `custom` this will overwrite some other arguments.')
@@ -191,6 +191,7 @@ def main(args):
     device = get_device(is_gpu=not args.no_cuda)
     exp_dir = os.path.join(RES_DIR, args.name)
     logger.info("Root directory for saving and loading experiments: {}".format(exp_dir))
+    aggregate = "pooled" in args.model_type.lower()
 
     if not args.is_eval_only:
 
@@ -207,16 +208,18 @@ def main(args):
                                        batch_size=args.batch_size,
                                        logger=logger,
                                         embedding=args.embedding, 
-                                        aggregate=args.aggregate,
+                                        aggregate=aggregate,
                                         subset=args.subset,
+                                        msa=args.msa_only,
                                        )
         else:
             train_loader = get_dataloaders(args.dataset,
                                        batch_size=args.batch_size,
                                        logger=logger,
                                         embedding=args.embedding, 
-                                        aggregate=args.aggregate,
+                                        aggregate=aggregate,
                                         subset=args.subset,
+                                        msa=args.msa_only,
                                        )
         logger.info("Train {} with {} samples".format(args.dataset, len(train_loader.dataset)))
 
@@ -256,7 +259,8 @@ def main(args):
                                       shuffle=False,
                                       embedding=args.embedding, 
                                       subset=args.subset,
-                                      aggregate=args.aggregate,
+                                      msa=args.msa_only,
+                                      aggregate=aggregate,
                                       logger=logger)
         loss_f = get_loss_f(args.loss,
                             n_data=len(test_loader.dataset),
