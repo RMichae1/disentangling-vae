@@ -1,421 +1,841 @@
-ArrayID Dataset VaeType Embedding z_dim aggregate rec_dist subset
-0 gfp VAE esm2xs 2 True gaussian 
-1 gfp VAE esm2xs 10 True gaussian 
-2 gfp VAE esm2xs 20 True gaussian 
-3 gfp VAE esm2xs 50 True gaussian 
-4 gfp VAE esm2xs 100 True gaussian 
-5 gfp VAE esm2xs 150 True gaussian 
-6 gfp VAE esm2xs 200 True gaussian 
-7 gfp VAE esm2 2 True gaussian 
-8 gfp VAE esm2 10 True gaussian 
-9 gfp VAE esm2 20 True gaussian 
-10 gfp VAE esm2 50 True gaussian 
-11 gfp VAE esm2 100 True gaussian 
-12 gfp VAE esm2 150 True gaussian 
-13 gfp VAE esm2 200 True gaussian 
-14 gfp factor esm2xs 2 True gaussian 
-15 gfp factor esm2xs 10 True gaussian 
-16 gfp factor esm2xs 20 True gaussian 
-17 gfp factor esm2xs 50 True gaussian 
-18 gfp factor esm2xs 100 True gaussian 
-19 gfp factor esm2xs 150 True gaussian 
-20 gfp factor esm2xs 200 True gaussian 
-21 gfp factor esm2 2 True gaussian 
-22 gfp factor esm2 10 True gaussian 
-23 gfp factor esm2 20 True gaussian 
-24 gfp factor esm2 50 True gaussian 
-25 gfp factor esm2 100 True gaussian 
-26 gfp factor esm2 150 True gaussian 
-27 gfp factor esm2 200 True gaussian 
-28 gfp btcvae esm2xs 2 True gaussian 
-29 gfp btcvae esm2xs 10 True gaussian 
-30 gfp btcvae esm2xs 20 True gaussian 
-31 gfp btcvae esm2xs 50 True gaussian 
-32 gfp btcvae esm2xs 100 True gaussian 
-33 gfp btcvae esm2xs 150 True gaussian 
-34 gfp btcvae esm2xs 200 True gaussian 
-35 gfp btcvae esm2 2 True gaussian 
-36 gfp btcvae esm2 10 True gaussian 
-37 gfp btcvae esm2 20 True gaussian 
-38 gfp btcvae esm2 50 True gaussian 
-39 gfp btcvae esm2 100 True gaussian 
-40 gfp btcvae esm2 150 True gaussian 
-41 gfp btcvae esm2 200 True gaussian 
-42 yeast VAE esm2xs 2 True gaussian 
-43 yeast VAE esm2xs 10 True gaussian 
-44 yeast VAE esm2xs 20 True gaussian 
-45 yeast VAE esm2xs 50 True gaussian 
-46 yeast VAE esm2xs 100 True gaussian 
-47 yeast VAE esm2xs 150 True gaussian 
-48 yeast VAE esm2xs 200 True gaussian 
-49 yeast VAE esm2 2 True gaussian 
-50 yeast VAE esm2 10 True gaussian 
-51 yeast VAE esm2 20 True gaussian 
-52 yeast VAE esm2 50 True gaussian 
-53 yeast VAE esm2 100 True gaussian 
-54 yeast VAE esm2 150 True gaussian 
-55 yeast VAE esm2 200 True gaussian 
-56 yeast factor esm2xs 2 True gaussian 
-57 yeast factor esm2xs 10 True gaussian 
-58 yeast factor esm2xs 20 True gaussian 
-59 yeast factor esm2xs 50 True gaussian 
-60 yeast factor esm2xs 100 True gaussian 
-61 yeast factor esm2xs 150 True gaussian 
-62 yeast factor esm2xs 200 True gaussian 
-63 yeast factor esm2 2 True gaussian 
-64 yeast factor esm2 10 True gaussian 
-65 yeast factor esm2 20 True gaussian 
-66 yeast factor esm2 50 True gaussian 
-67 yeast factor esm2 100 True gaussian 
-68 yeast factor esm2 150 True gaussian 
-69 yeast factor esm2 200 True gaussian 
-70 yeast btcvae esm2xs 2 True gaussian 
-71 yeast btcvae esm2xs 10 True gaussian 
-72 yeast btcvae esm2xs 20 True gaussian 
-73 yeast btcvae esm2xs 50 True gaussian 
-74 yeast btcvae esm2xs 100 True gaussian 
-75 yeast btcvae esm2xs 150 True gaussian 
-76 yeast btcvae esm2xs 200 True gaussian 
-77 yeast btcvae esm2 2 True gaussian 
-78 yeast btcvae esm2 10 True gaussian 
-79 yeast btcvae esm2 20 True gaussian 
-80 yeast btcvae esm2 50 True gaussian 
-81 yeast btcvae esm2 100 True gaussian 
-82 yeast btcvae esm2 150 True gaussian 
-83 yeast btcvae esm2 200 True gaussian 
-84 gfp VAE esm2xs 2 False gaussian gfp
-85 gfp VAE esm2xs 2 True gaussian gfp
-86 gfp VAE esm2xs 10 False gaussian gfp
-87 gfp VAE esm2xs 10 True gaussian gfp
-88 gfp VAE esm2xs 20 False gaussian gfp
-89 gfp VAE esm2xs 20 True gaussian gfp
-90 gfp VAE esm2xs 50 False gaussian gfp
-91 gfp VAE esm2xs 50 True gaussian gfp
-92 gfp VAE esm2xs 100 False gaussian gfp
-93 gfp VAE esm2xs 100 True gaussian gfp
-94 gfp VAE esm2xs 150 False gaussian gfp
-95 gfp VAE esm2xs 150 True gaussian gfp
-96 gfp VAE esm2xs 200 False gaussian gfp
-97 gfp VAE esm2xs 200 True gaussian gfp
-98 gfp VAE esm2 2 False gaussian gfp
-99 gfp VAE esm2 2 True gaussian gfp
-100 gfp VAE esm2 10 False gaussian gfp
-101 gfp VAE esm2 10 True gaussian gfp
-102 gfp VAE esm2 20 False gaussian gfp
-103 gfp VAE esm2 20 True gaussian gfp
-104 gfp VAE esm2 50 False gaussian gfp
-105 gfp VAE esm2 50 True gaussian gfp
-106 gfp VAE esm2 100 False gaussian gfp
-107 gfp VAE esm2 100 True gaussian gfp
-108 gfp VAE esm2 150 False gaussian gfp
-109 gfp VAE esm2 150 True gaussian gfp
-110 gfp VAE esm2 200 False gaussian gfp
-111 gfp VAE esm2 200 True gaussian gfp
-112 gfp factor esm2xs 2 False gaussian gfp
-113 gfp factor esm2xs 2 True gaussian gfp
-114 gfp factor esm2xs 10 False gaussian gfp
-115 gfp factor esm2xs 10 True gaussian gfp
-116 gfp factor esm2xs 20 False gaussian gfp
-117 gfp factor esm2xs 20 True gaussian gfp
-118 gfp factor esm2xs 50 False gaussian gfp
-119 gfp factor esm2xs 50 True gaussian gfp
-120 gfp factor esm2xs 100 False gaussian gfp
-121 gfp factor esm2xs 100 True gaussian gfp
-122 gfp factor esm2xs 150 False gaussian gfp
-123 gfp factor esm2xs 150 True gaussian gfp
-124 gfp factor esm2xs 200 False gaussian gfp
-125 gfp factor esm2xs 200 True gaussian gfp
-126 gfp factor esm2 2 False gaussian gfp
-127 gfp factor esm2 2 True gaussian gfp
-128 gfp factor esm2 10 False gaussian gfp
-129 gfp factor esm2 10 True gaussian gfp
-130 gfp factor esm2 20 False gaussian gfp
-131 gfp factor esm2 20 True gaussian gfp
-132 gfp factor esm2 50 False gaussian gfp
-133 gfp factor esm2 50 True gaussian gfp
-134 gfp factor esm2 100 False gaussian gfp
-135 gfp factor esm2 100 True gaussian gfp
-136 gfp factor esm2 150 False gaussian gfp
-137 gfp factor esm2 150 True gaussian gfp
-138 gfp factor esm2 200 False gaussian gfp
-139 gfp factor esm2 200 True gaussian gfp
-140 gfp btcvae esm2xs 2 False gaussian gfp
-141 gfp btcvae esm2xs 2 True gaussian gfp
-142 gfp btcvae esm2xs 10 False gaussian gfp
-143 gfp btcvae esm2xs 10 True gaussian gfp
-144 gfp btcvae esm2xs 20 False gaussian gfp
-145 gfp btcvae esm2xs 20 True gaussian gfp
-146 gfp btcvae esm2xs 50 False gaussian gfp
-147 gfp btcvae esm2xs 50 True gaussian gfp
-148 gfp btcvae esm2xs 100 False gaussian gfp
-149 gfp btcvae esm2xs 100 True gaussian gfp
-150 gfp btcvae esm2xs 150 False gaussian gfp
-151 gfp btcvae esm2xs 150 True gaussian gfp
-152 gfp btcvae esm2xs 200 False gaussian gfp
-153 gfp btcvae esm2xs 200 True gaussian gfp
-154 gfp btcvae esm2 2 False gaussian gfp
-155 gfp btcvae esm2 2 True gaussian gfp
-156 gfp btcvae esm2 10 False gaussian gfp
-157 gfp btcvae esm2 10 True gaussian gfp
-158 gfp btcvae esm2 20 False gaussian gfp
-159 gfp btcvae esm2 20 True gaussian gfp
-160 gfp btcvae esm2 50 False gaussian gfp
-161 gfp btcvae esm2 50 True gaussian gfp
-162 gfp btcvae esm2 100 False gaussian gfp
-163 gfp btcvae esm2 100 True gaussian gfp
-164 gfp btcvae esm2 150 False gaussian gfp
-165 gfp btcvae esm2 150 True gaussian gfp
-166 gfp btcvae esm2 200 False gaussian gfp
-167 gfp btcvae esm2 200 True gaussian gfp
-168 gfp VAE esm2xs 2 False gaussian d7pm05
-169 gfp VAE esm2xs 2 True gaussian d7pm05
-170 gfp VAE esm2xs 10 False gaussian d7pm05
-171 gfp VAE esm2xs 10 True gaussian d7pm05
-172 gfp VAE esm2xs 20 False gaussian d7pm05
-173 gfp VAE esm2xs 20 True gaussian d7pm05
-174 gfp VAE esm2xs 50 False gaussian d7pm05
-175 gfp VAE esm2xs 50 True gaussian d7pm05
-176 gfp VAE esm2xs 100 False gaussian d7pm05
-177 gfp VAE esm2xs 100 True gaussian d7pm05
-178 gfp VAE esm2xs 150 False gaussian d7pm05
-179 gfp VAE esm2xs 150 True gaussian d7pm05
-180 gfp VAE esm2xs 200 False gaussian d7pm05
-181 gfp VAE esm2xs 200 True gaussian d7pm05
-182 gfp VAE esm2 2 False gaussian d7pm05
-183 gfp VAE esm2 2 True gaussian d7pm05
-184 gfp VAE esm2 10 False gaussian d7pm05
-185 gfp VAE esm2 10 True gaussian d7pm05
-186 gfp VAE esm2 20 False gaussian d7pm05
-187 gfp VAE esm2 20 True gaussian d7pm05
-188 gfp VAE esm2 50 False gaussian d7pm05
-189 gfp VAE esm2 50 True gaussian d7pm05
-190 gfp VAE esm2 100 False gaussian d7pm05
-191 gfp VAE esm2 100 True gaussian d7pm05
-192 gfp VAE esm2 150 False gaussian d7pm05
-193 gfp VAE esm2 150 True gaussian d7pm05
-194 gfp VAE esm2 200 False gaussian d7pm05
-195 gfp VAE esm2 200 True gaussian d7pm05
-196 gfp factor esm2xs 2 False gaussian d7pm05
-197 gfp factor esm2xs 2 True gaussian d7pm05
-198 gfp factor esm2xs 10 False gaussian d7pm05
-199 gfp factor esm2xs 10 True gaussian d7pm05
-200 gfp factor esm2xs 20 False gaussian d7pm05
-201 gfp factor esm2xs 20 True gaussian d7pm05
-202 gfp factor esm2xs 50 False gaussian d7pm05
-203 gfp factor esm2xs 50 True gaussian d7pm05
-204 gfp factor esm2xs 100 False gaussian d7pm05
-205 gfp factor esm2xs 100 True gaussian d7pm05
-206 gfp factor esm2xs 150 False gaussian d7pm05
-207 gfp factor esm2xs 150 True gaussian d7pm05
-208 gfp factor esm2xs 200 False gaussian d7pm05
-209 gfp factor esm2xs 200 True gaussian d7pm05
-210 gfp factor esm2 2 False gaussian d7pm05
-211 gfp factor esm2 2 True gaussian d7pm05
-212 gfp factor esm2 10 False gaussian d7pm05
-213 gfp factor esm2 10 True gaussian d7pm05
-214 gfp factor esm2 20 False gaussian d7pm05
-215 gfp factor esm2 20 True gaussian d7pm05
-216 gfp factor esm2 50 False gaussian d7pm05
-217 gfp factor esm2 50 True gaussian d7pm05
-218 gfp factor esm2 100 False gaussian d7pm05
-219 gfp factor esm2 100 True gaussian d7pm05
-220 gfp factor esm2 150 False gaussian d7pm05
-221 gfp factor esm2 150 True gaussian d7pm05
-222 gfp factor esm2 200 False gaussian d7pm05
-223 gfp factor esm2 200 True gaussian d7pm05
-224 gfp btcvae esm2xs 2 False gaussian d7pm05
-225 gfp btcvae esm2xs 2 True gaussian d7pm05
-226 gfp btcvae esm2xs 10 False gaussian d7pm05
-227 gfp btcvae esm2xs 10 True gaussian d7pm05
-228 gfp btcvae esm2xs 20 False gaussian d7pm05
-229 gfp btcvae esm2xs 20 True gaussian d7pm05
-230 gfp btcvae esm2xs 50 False gaussian d7pm05
-231 gfp btcvae esm2xs 50 True gaussian d7pm05
-232 gfp btcvae esm2xs 100 False gaussian d7pm05
-233 gfp btcvae esm2xs 100 True gaussian d7pm05
-234 gfp btcvae esm2xs 150 False gaussian d7pm05
-235 gfp btcvae esm2xs 150 True gaussian d7pm05
-236 gfp btcvae esm2xs 200 False gaussian d7pm05
-237 gfp btcvae esm2xs 200 True gaussian d7pm05
-238 gfp btcvae esm2 2 False gaussian d7pm05
-239 gfp btcvae esm2 2 True gaussian d7pm05
-240 gfp btcvae esm2 10 False gaussian d7pm05
-241 gfp btcvae esm2 10 True gaussian d7pm05
-242 gfp btcvae esm2 20 False gaussian d7pm05
-243 gfp btcvae esm2 20 True gaussian d7pm05
-244 gfp btcvae esm2 50 False gaussian d7pm05
-245 gfp btcvae esm2 50 True gaussian d7pm05
-246 gfp btcvae esm2 100 False gaussian d7pm05
-247 gfp btcvae esm2 100 True gaussian d7pm05
-248 gfp btcvae esm2 150 False gaussian d7pm05
-249 gfp btcvae esm2 150 True gaussian d7pm05
-250 gfp btcvae esm2 200 False gaussian d7pm05
-251 gfp btcvae esm2 200 True gaussian d7pm05
-252 yeast VAE esm2xs 2 False gaussian pabp
-253 yeast VAE esm2xs 2 True gaussian pabp
-254 yeast VAE esm2xs 10 False gaussian pabp
-255 yeast VAE esm2xs 10 True gaussian pabp
-256 yeast VAE esm2xs 20 False gaussian pabp
-257 yeast VAE esm2xs 20 True gaussian pabp
-258 yeast VAE esm2xs 50 False gaussian pabp
-259 yeast VAE esm2xs 50 True gaussian pabp
-260 yeast VAE esm2xs 100 False gaussian pabp
-261 yeast VAE esm2xs 100 True gaussian pabp
-262 yeast VAE esm2xs 150 False gaussian pabp
-263 yeast VAE esm2xs 150 True gaussian pabp
-264 yeast VAE esm2xs 200 False gaussian pabp
-265 yeast VAE esm2xs 200 True gaussian pabp
-266 yeast VAE esm2 2 False gaussian pabp
-267 yeast VAE esm2 2 True gaussian pabp
-268 yeast VAE esm2 10 False gaussian pabp
-269 yeast VAE esm2 10 True gaussian pabp
-270 yeast VAE esm2 20 False gaussian pabp
-271 yeast VAE esm2 20 True gaussian pabp
-272 yeast VAE esm2 50 False gaussian pabp
-273 yeast VAE esm2 50 True gaussian pabp
-274 yeast VAE esm2 100 False gaussian pabp
-275 yeast VAE esm2 100 True gaussian pabp
-276 yeast VAE esm2 150 False gaussian pabp
-277 yeast VAE esm2 150 True gaussian pabp
-278 yeast VAE esm2 200 False gaussian pabp
-279 yeast VAE esm2 200 True gaussian pabp
-280 yeast factor esm2xs 2 False gaussian pabp
-281 yeast factor esm2xs 2 True gaussian pabp
-282 yeast factor esm2xs 10 False gaussian pabp
-283 yeast factor esm2xs 10 True gaussian pabp
-284 yeast factor esm2xs 20 False gaussian pabp
-285 yeast factor esm2xs 20 True gaussian pabp
-286 yeast factor esm2xs 50 False gaussian pabp
-287 yeast factor esm2xs 50 True gaussian pabp
-288 yeast factor esm2xs 100 False gaussian pabp
-289 yeast factor esm2xs 100 True gaussian pabp
-290 yeast factor esm2xs 150 False gaussian pabp
-291 yeast factor esm2xs 150 True gaussian pabp
-292 yeast factor esm2xs 200 False gaussian pabp
-293 yeast factor esm2xs 200 True gaussian pabp
-294 yeast factor esm2 2 False gaussian pabp
-295 yeast factor esm2 2 True gaussian pabp
-296 yeast factor esm2 10 False gaussian pabp
-297 yeast factor esm2 10 True gaussian pabp
-298 yeast factor esm2 20 False gaussian pabp
-299 yeast factor esm2 20 True gaussian pabp
-300 yeast factor esm2 50 False gaussian pabp
-301 yeast factor esm2 50 True gaussian pabp
-302 yeast factor esm2 100 False gaussian pabp
-303 yeast factor esm2 100 True gaussian pabp
-304 yeast factor esm2 150 False gaussian pabp
-305 yeast factor esm2 150 True gaussian pabp
-306 yeast factor esm2 200 False gaussian pabp
-307 yeast factor esm2 200 True gaussian pabp
-308 yeast btcvae esm2xs 2 False gaussian pabp
-309 yeast btcvae esm2xs 2 True gaussian pabp
-310 yeast btcvae esm2xs 10 False gaussian pabp
-311 yeast btcvae esm2xs 10 True gaussian pabp
-312 yeast btcvae esm2xs 20 False gaussian pabp
-313 yeast btcvae esm2xs 20 True gaussian pabp
-314 yeast btcvae esm2xs 50 False gaussian pabp
-315 yeast btcvae esm2xs 50 True gaussian pabp
-316 yeast btcvae esm2xs 100 False gaussian pabp
-317 yeast btcvae esm2xs 100 True gaussian pabp
-318 yeast btcvae esm2xs 150 False gaussian pabp
-319 yeast btcvae esm2xs 150 True gaussian pabp
-320 yeast btcvae esm2xs 200 False gaussian pabp
-321 yeast btcvae esm2xs 200 True gaussian pabp
-322 yeast btcvae esm2 2 False gaussian pabp
-323 yeast btcvae esm2 2 True gaussian pabp
-324 yeast btcvae esm2 10 False gaussian pabp
-325 yeast btcvae esm2 10 True gaussian pabp
-326 yeast btcvae esm2 20 False gaussian pabp
-327 yeast btcvae esm2 20 True gaussian pabp
-328 yeast btcvae esm2 50 False gaussian pabp
-329 yeast btcvae esm2 50 True gaussian pabp
-330 yeast btcvae esm2 100 False gaussian pabp
-331 yeast btcvae esm2 100 True gaussian pabp
-332 yeast btcvae esm2 150 False gaussian pabp
-333 yeast btcvae esm2 150 True gaussian pabp
-334 yeast btcvae esm2 200 False gaussian pabp
-335 yeast btcvae esm2 200 True gaussian pabp
-336 yeast VAE esm2xs 2 False gaussian his7
-337 yeast VAE esm2xs 2 True gaussian his7
-338 yeast VAE esm2xs 10 False gaussian his7
-339 yeast VAE esm2xs 10 True gaussian his7
-340 yeast VAE esm2xs 20 False gaussian his7
-341 yeast VAE esm2xs 20 True gaussian his7
-342 yeast VAE esm2xs 50 False gaussian his7
-343 yeast VAE esm2xs 50 True gaussian his7
-344 yeast VAE esm2xs 100 False gaussian his7
-345 yeast VAE esm2xs 100 True gaussian his7
-346 yeast VAE esm2xs 150 False gaussian his7
-347 yeast VAE esm2xs 150 True gaussian his7
-348 yeast VAE esm2xs 200 False gaussian his7
-349 yeast VAE esm2xs 200 True gaussian his7
-350 yeast VAE esm2 2 False gaussian his7
-351 yeast VAE esm2 2 True gaussian his7
-352 yeast VAE esm2 10 False gaussian his7
-353 yeast VAE esm2 10 True gaussian his7
-354 yeast VAE esm2 20 False gaussian his7
-355 yeast VAE esm2 20 True gaussian his7
-356 yeast VAE esm2 50 False gaussian his7
-357 yeast VAE esm2 50 True gaussian his7
-358 yeast VAE esm2 100 False gaussian his7
-359 yeast VAE esm2 100 True gaussian his7
-360 yeast VAE esm2 150 False gaussian his7
-361 yeast VAE esm2 150 True gaussian his7
-362 yeast VAE esm2 200 False gaussian his7
-363 yeast VAE esm2 200 True gaussian his7
-364 yeast factor esm2xs 2 False gaussian his7
-365 yeast factor esm2xs 2 True gaussian his7
-366 yeast factor esm2xs 10 False gaussian his7
-367 yeast factor esm2xs 10 True gaussian his7
-368 yeast factor esm2xs 20 False gaussian his7
-369 yeast factor esm2xs 20 True gaussian his7
-370 yeast factor esm2xs 50 False gaussian his7
-371 yeast factor esm2xs 50 True gaussian his7
-372 yeast factor esm2xs 100 False gaussian his7
-373 yeast factor esm2xs 100 True gaussian his7
-374 yeast factor esm2xs 150 False gaussian his7
-375 yeast factor esm2xs 150 True gaussian his7
-376 yeast factor esm2xs 200 False gaussian his7
-377 yeast factor esm2xs 200 True gaussian his7
-378 yeast factor esm2 2 False gaussian his7
-379 yeast factor esm2 2 True gaussian his7
-380 yeast factor esm2 10 False gaussian his7
-381 yeast factor esm2 10 True gaussian his7
-382 yeast factor esm2 20 False gaussian his7
-383 yeast factor esm2 20 True gaussian his7
-384 yeast factor esm2 50 False gaussian his7
-385 yeast factor esm2 50 True gaussian his7
-386 yeast factor esm2 100 False gaussian his7
-387 yeast factor esm2 100 True gaussian his7
-388 yeast factor esm2 150 False gaussian his7
-389 yeast factor esm2 150 True gaussian his7
-390 yeast factor esm2 200 False gaussian his7
-391 yeast factor esm2 200 True gaussian his7
-392 yeast btcvae esm2xs 2 False gaussian his7
-393 yeast btcvae esm2xs 2 True gaussian his7
-394 yeast btcvae esm2xs 10 False gaussian his7
-395 yeast btcvae esm2xs 10 True gaussian his7
-396 yeast btcvae esm2xs 20 False gaussian his7
-397 yeast btcvae esm2xs 20 True gaussian his7
-398 yeast btcvae esm2xs 50 False gaussian his7
-399 yeast btcvae esm2xs 50 True gaussian his7
-400 yeast btcvae esm2xs 100 False gaussian his7
-401 yeast btcvae esm2xs 100 True gaussian his7
-402 yeast btcvae esm2xs 150 False gaussian his7
-403 yeast btcvae esm2xs 150 True gaussian his7
-404 yeast btcvae esm2xs 200 False gaussian his7
-405 yeast btcvae esm2xs 200 True gaussian his7
-406 yeast btcvae esm2 2 False gaussian his7
-407 yeast btcvae esm2 2 True gaussian his7
-408 yeast btcvae esm2 10 False gaussian his7
-409 yeast btcvae esm2 10 True gaussian his7
-410 yeast btcvae esm2 20 False gaussian his7
-411 yeast btcvae esm2 20 True gaussian his7
-412 yeast btcvae esm2 50 False gaussian his7
-413 yeast btcvae esm2 50 True gaussian his7
-414 yeast btcvae esm2 100 False gaussian his7
-415 yeast btcvae esm2 100 True gaussian his7
-416 yeast btcvae esm2 150 False gaussian his7
-417 yeast btcvae esm2 150 True gaussian his7
-418 yeast btcvae esm2 200 False gaussian his7
-419 yeast btcvae esm2 200 True gaussian his7
+ArrayID Dataset VaeType Embedding ModelType MSA z_dim rec_dist subset
+0 gfp VAE esm2xs Seqpooled False 2 gaussian 
+1 gfp VAE esm2xs Seqpooled False 10 gaussian 
+2 gfp VAE esm2xs Seqpooled False 20 gaussian 
+3 gfp VAE esm2xs Seqpooled False 50 gaussian 
+4 gfp VAE esm2xs Seqpooled False 100 gaussian 
+5 gfp VAE esm2xs Seqpooled False 150 gaussian 
+6 gfp VAE esm2xs Seqpooled False 200 gaussian 
+7 gfp VAE esm2 Seqpooled False 2 gaussian 
+8 gfp VAE esm2 Seqpooled False 10 gaussian 
+9 gfp VAE esm2 Seqpooled False 20 gaussian 
+10 gfp VAE esm2 Seqpooled False 50 gaussian 
+11 gfp VAE esm2 Seqpooled False 100 gaussian 
+12 gfp VAE esm2 Seqpooled False 150 gaussian 
+13 gfp VAE esm2 Seqpooled False 200 gaussian 
+14 gfp factor esm2xs Seqpooled False 2 gaussian 
+15 gfp factor esm2xs Seqpooled False 10 gaussian 
+16 gfp factor esm2xs Seqpooled False 20 gaussian 
+17 gfp factor esm2xs Seqpooled False 50 gaussian 
+18 gfp factor esm2xs Seqpooled False 100 gaussian 
+19 gfp factor esm2xs Seqpooled False 150 gaussian 
+20 gfp factor esm2xs Seqpooled False 200 gaussian 
+21 gfp factor esm2 Seqpooled False 2 gaussian 
+22 gfp factor esm2 Seqpooled False 10 gaussian 
+23 gfp factor esm2 Seqpooled False 20 gaussian 
+24 gfp factor esm2 Seqpooled False 50 gaussian 
+25 gfp factor esm2 Seqpooled False 100 gaussian 
+26 gfp factor esm2 Seqpooled False 150 gaussian 
+27 gfp factor esm2 Seqpooled False 200 gaussian 
+28 gfp btcvae esm2xs Seqpooled False 2 gaussian 
+29 gfp btcvae esm2xs Seqpooled False 10 gaussian 
+30 gfp btcvae esm2xs Seqpooled False 20 gaussian 
+31 gfp btcvae esm2xs Seqpooled False 50 gaussian 
+32 gfp btcvae esm2xs Seqpooled False 100 gaussian 
+33 gfp btcvae esm2xs Seqpooled False 150 gaussian 
+34 gfp btcvae esm2xs Seqpooled False 200 gaussian 
+35 gfp btcvae esm2 Seqpooled False 2 gaussian 
+36 gfp btcvae esm2 Seqpooled False 10 gaussian 
+37 gfp btcvae esm2 Seqpooled False 20 gaussian 
+38 gfp btcvae esm2 Seqpooled False 50 gaussian 
+39 gfp btcvae esm2 Seqpooled False 100 gaussian 
+40 gfp btcvae esm2 Seqpooled False 150 gaussian 
+41 gfp btcvae esm2 Seqpooled False 200 gaussian 
+42 yeast VAE esm2xs Seqpooled False 2 gaussian 
+43 yeast VAE esm2xs Seqpooled False 10 gaussian 
+44 yeast VAE esm2xs Seqpooled False 20 gaussian 
+45 yeast VAE esm2xs Seqpooled False 50 gaussian 
+46 yeast VAE esm2xs Seqpooled False 100 gaussian 
+47 yeast VAE esm2xs Seqpooled False 150 gaussian 
+48 yeast VAE esm2xs Seqpooled False 200 gaussian 
+49 yeast VAE esm2 Seqpooled False 2 gaussian 
+50 yeast VAE esm2 Seqpooled False 10 gaussian 
+51 yeast VAE esm2 Seqpooled False 20 gaussian 
+52 yeast VAE esm2 Seqpooled False 50 gaussian 
+53 yeast VAE esm2 Seqpooled False 100 gaussian 
+54 yeast VAE esm2 Seqpooled False 150 gaussian 
+55 yeast VAE esm2 Seqpooled False 200 gaussian 
+56 yeast factor esm2xs Seqpooled False 2 gaussian 
+57 yeast factor esm2xs Seqpooled False 10 gaussian 
+58 yeast factor esm2xs Seqpooled False 20 gaussian 
+59 yeast factor esm2xs Seqpooled False 50 gaussian 
+60 yeast factor esm2xs Seqpooled False 100 gaussian 
+61 yeast factor esm2xs Seqpooled False 150 gaussian 
+62 yeast factor esm2xs Seqpooled False 200 gaussian 
+63 yeast factor esm2 Seqpooled False 2 gaussian 
+64 yeast factor esm2 Seqpooled False 10 gaussian 
+65 yeast factor esm2 Seqpooled False 20 gaussian 
+66 yeast factor esm2 Seqpooled False 50 gaussian 
+67 yeast factor esm2 Seqpooled False 100 gaussian 
+68 yeast factor esm2 Seqpooled False 150 gaussian 
+69 yeast factor esm2 Seqpooled False 200 gaussian 
+70 yeast btcvae esm2xs Seqpooled False 2 gaussian 
+71 yeast btcvae esm2xs Seqpooled False 10 gaussian 
+72 yeast btcvae esm2xs Seqpooled False 20 gaussian 
+73 yeast btcvae esm2xs Seqpooled False 50 gaussian 
+74 yeast btcvae esm2xs Seqpooled False 100 gaussian 
+75 yeast btcvae esm2xs Seqpooled False 150 gaussian 
+76 yeast btcvae esm2xs Seqpooled False 200 gaussian 
+77 yeast btcvae esm2 Seqpooled False 2 gaussian 
+78 yeast btcvae esm2 Seqpooled False 10 gaussian 
+79 yeast btcvae esm2 Seqpooled False 20 gaussian 
+80 yeast btcvae esm2 Seqpooled False 50 gaussian 
+81 yeast btcvae esm2 Seqpooled False 100 gaussian 
+82 yeast btcvae esm2 Seqpooled False 150 gaussian 
+83 yeast btcvae esm2 Seqpooled False 200 gaussian 
+84 gfp VAE esm2xs Seq False 2 gaussian gfp
+85 gfp VAE esm2xs Seqpooled False 2 gaussian gfp
+86 gfp VAE esm2xs Seq False 10 gaussian gfp
+87 gfp VAE esm2xs Seqpooled False 10 gaussian gfp
+88 gfp VAE esm2xs Seq False 20 gaussian gfp
+89 gfp VAE esm2xs Seqpooled False 20 gaussian gfp
+90 gfp VAE esm2xs Seq False 50 gaussian gfp
+91 gfp VAE esm2xs Seqpooled False 50 gaussian gfp
+92 gfp VAE esm2xs Seq False 100 gaussian gfp
+93 gfp VAE esm2xs Seqpooled False 100 gaussian gfp
+94 gfp VAE esm2xs Seq False 150 gaussian gfp
+95 gfp VAE esm2xs Seqpooled False 150 gaussian gfp
+96 gfp VAE esm2xs Seq False 200 gaussian gfp
+97 gfp VAE esm2xs Seqpooled False 200 gaussian gfp
+98 gfp VAE esm2 Seq False 2 gaussian gfp
+99 gfp VAE esm2 Seqpooled False 2 gaussian gfp
+100 gfp VAE esm2 Seq False 10 gaussian gfp
+101 gfp VAE esm2 Seqpooled False 10 gaussian gfp
+102 gfp VAE esm2 Seq False 20 gaussian gfp
+103 gfp VAE esm2 Seqpooled False 20 gaussian gfp
+104 gfp VAE esm2 Seq False 50 gaussian gfp
+105 gfp VAE esm2 Seqpooled False 50 gaussian gfp
+106 gfp VAE esm2 Seq False 100 gaussian gfp
+107 gfp VAE esm2 Seqpooled False 100 gaussian gfp
+108 gfp VAE esm2 Seq False 150 gaussian gfp
+109 gfp VAE esm2 Seqpooled False 150 gaussian gfp
+110 gfp VAE esm2 Seq False 200 gaussian gfp
+111 gfp VAE esm2 Seqpooled False 200 gaussian gfp
+112 gfp factor esm2xs Seq False 2 gaussian gfp
+113 gfp factor esm2xs Seqpooled False 2 gaussian gfp
+114 gfp factor esm2xs Seq False 10 gaussian gfp
+115 gfp factor esm2xs Seqpooled False 10 gaussian gfp
+116 gfp factor esm2xs Seq False 20 gaussian gfp
+117 gfp factor esm2xs Seqpooled False 20 gaussian gfp
+118 gfp factor esm2xs Seq False 50 gaussian gfp
+119 gfp factor esm2xs Seqpooled False 50 gaussian gfp
+120 gfp factor esm2xs Seq False 100 gaussian gfp
+121 gfp factor esm2xs Seqpooled False 100 gaussian gfp
+122 gfp factor esm2xs Seq False 150 gaussian gfp
+123 gfp factor esm2xs Seqpooled False 150 gaussian gfp
+124 gfp factor esm2xs Seq False 200 gaussian gfp
+125 gfp factor esm2xs Seqpooled False 200 gaussian gfp
+126 gfp factor esm2 Seq False 2 gaussian gfp
+127 gfp factor esm2 Seqpooled False 2 gaussian gfp
+128 gfp factor esm2 Seq False 10 gaussian gfp
+129 gfp factor esm2 Seqpooled False 10 gaussian gfp
+130 gfp factor esm2 Seq False 20 gaussian gfp
+131 gfp factor esm2 Seqpooled False 20 gaussian gfp
+132 gfp factor esm2 Seq False 50 gaussian gfp
+133 gfp factor esm2 Seqpooled False 50 gaussian gfp
+134 gfp factor esm2 Seq False 100 gaussian gfp
+135 gfp factor esm2 Seqpooled False 100 gaussian gfp
+136 gfp factor esm2 Seq False 150 gaussian gfp
+137 gfp factor esm2 Seqpooled False 150 gaussian gfp
+138 gfp factor esm2 Seq False 200 gaussian gfp
+139 gfp factor esm2 Seqpooled False 200 gaussian gfp
+140 gfp btcvae esm2xs Seq False 2 gaussian gfp
+141 gfp btcvae esm2xs Seqpooled False 2 gaussian gfp
+142 gfp btcvae esm2xs Seq False 10 gaussian gfp
+143 gfp btcvae esm2xs Seqpooled False 10 gaussian gfp
+144 gfp btcvae esm2xs Seq False 20 gaussian gfp
+145 gfp btcvae esm2xs Seqpooled False 20 gaussian gfp
+146 gfp btcvae esm2xs Seq False 50 gaussian gfp
+147 gfp btcvae esm2xs Seqpooled False 50 gaussian gfp
+148 gfp btcvae esm2xs Seq False 100 gaussian gfp
+149 gfp btcvae esm2xs Seqpooled False 100 gaussian gfp
+150 gfp btcvae esm2xs Seq False 150 gaussian gfp
+151 gfp btcvae esm2xs Seqpooled False 150 gaussian gfp
+152 gfp btcvae esm2xs Seq False 200 gaussian gfp
+153 gfp btcvae esm2xs Seqpooled False 200 gaussian gfp
+154 gfp btcvae esm2 Seq False 2 gaussian gfp
+155 gfp btcvae esm2 Seqpooled False 2 gaussian gfp
+156 gfp btcvae esm2 Seq False 10 gaussian gfp
+157 gfp btcvae esm2 Seqpooled False 10 gaussian gfp
+158 gfp btcvae esm2 Seq False 20 gaussian gfp
+159 gfp btcvae esm2 Seqpooled False 20 gaussian gfp
+160 gfp btcvae esm2 Seq False 50 gaussian gfp
+161 gfp btcvae esm2 Seqpooled False 50 gaussian gfp
+162 gfp btcvae esm2 Seq False 100 gaussian gfp
+163 gfp btcvae esm2 Seqpooled False 100 gaussian gfp
+164 gfp btcvae esm2 Seq False 150 gaussian gfp
+165 gfp btcvae esm2 Seqpooled False 150 gaussian gfp
+166 gfp btcvae esm2 Seq False 200 gaussian gfp
+167 gfp btcvae esm2 Seqpooled False 200 gaussian gfp
+168 gfp VAE esm2xs Seq False 2 gaussian d7pm05
+169 gfp VAE esm2xs Seqpooled False 2 gaussian d7pm05
+170 gfp VAE esm2xs Seq False 10 gaussian d7pm05
+171 gfp VAE esm2xs Seqpooled False 10 gaussian d7pm05
+172 gfp VAE esm2xs Seq False 20 gaussian d7pm05
+173 gfp VAE esm2xs Seqpooled False 20 gaussian d7pm05
+174 gfp VAE esm2xs Seq False 50 gaussian d7pm05
+175 gfp VAE esm2xs Seqpooled False 50 gaussian d7pm05
+176 gfp VAE esm2xs Seq False 100 gaussian d7pm05
+177 gfp VAE esm2xs Seqpooled False 100 gaussian d7pm05
+178 gfp VAE esm2xs Seq False 150 gaussian d7pm05
+179 gfp VAE esm2xs Seqpooled False 150 gaussian d7pm05
+180 gfp VAE esm2xs Seq False 200 gaussian d7pm05
+181 gfp VAE esm2xs Seqpooled False 200 gaussian d7pm05
+182 gfp VAE esm2 Seq False 2 gaussian d7pm05
+183 gfp VAE esm2 Seqpooled False 2 gaussian d7pm05
+184 gfp VAE esm2 Seq False 10 gaussian d7pm05
+185 gfp VAE esm2 Seqpooled False 10 gaussian d7pm05
+186 gfp VAE esm2 Seq False 20 gaussian d7pm05
+187 gfp VAE esm2 Seqpooled False 20 gaussian d7pm05
+188 gfp VAE esm2 Seq False 50 gaussian d7pm05
+189 gfp VAE esm2 Seqpooled False 50 gaussian d7pm05
+190 gfp VAE esm2 Seq False 100 gaussian d7pm05
+191 gfp VAE esm2 Seqpooled False 100 gaussian d7pm05
+192 gfp VAE esm2 Seq False 150 gaussian d7pm05
+193 gfp VAE esm2 Seqpooled False 150 gaussian d7pm05
+194 gfp VAE esm2 Seq False 200 gaussian d7pm05
+195 gfp VAE esm2 Seqpooled False 200 gaussian d7pm05
+196 gfp factor esm2xs Seq False 2 gaussian d7pm05
+197 gfp factor esm2xs Seqpooled False 2 gaussian d7pm05
+198 gfp factor esm2xs Seq False 10 gaussian d7pm05
+199 gfp factor esm2xs Seqpooled False 10 gaussian d7pm05
+200 gfp factor esm2xs Seq False 20 gaussian d7pm05
+201 gfp factor esm2xs Seqpooled False 20 gaussian d7pm05
+202 gfp factor esm2xs Seq False 50 gaussian d7pm05
+203 gfp factor esm2xs Seqpooled False 50 gaussian d7pm05
+204 gfp factor esm2xs Seq False 100 gaussian d7pm05
+205 gfp factor esm2xs Seqpooled False 100 gaussian d7pm05
+206 gfp factor esm2xs Seq False 150 gaussian d7pm05
+207 gfp factor esm2xs Seqpooled False 150 gaussian d7pm05
+208 gfp factor esm2xs Seq False 200 gaussian d7pm05
+209 gfp factor esm2xs Seqpooled False 200 gaussian d7pm05
+210 gfp factor esm2 Seq False 2 gaussian d7pm05
+211 gfp factor esm2 Seqpooled False 2 gaussian d7pm05
+212 gfp factor esm2 Seq False 10 gaussian d7pm05
+213 gfp factor esm2 Seqpooled False 10 gaussian d7pm05
+214 gfp factor esm2 Seq False 20 gaussian d7pm05
+215 gfp factor esm2 Seqpooled False 20 gaussian d7pm05
+216 gfp factor esm2 Seq False 50 gaussian d7pm05
+217 gfp factor esm2 Seqpooled False 50 gaussian d7pm05
+218 gfp factor esm2 Seq False 100 gaussian d7pm05
+219 gfp factor esm2 Seqpooled False 100 gaussian d7pm05
+220 gfp factor esm2 Seq False 150 gaussian d7pm05
+221 gfp factor esm2 Seqpooled False 150 gaussian d7pm05
+222 gfp factor esm2 Seq False 200 gaussian d7pm05
+223 gfp factor esm2 Seqpooled False 200 gaussian d7pm05
+224 gfp btcvae esm2xs Seq False 2 gaussian d7pm05
+225 gfp btcvae esm2xs Seqpooled False 2 gaussian d7pm05
+226 gfp btcvae esm2xs Seq False 10 gaussian d7pm05
+227 gfp btcvae esm2xs Seqpooled False 10 gaussian d7pm05
+228 gfp btcvae esm2xs Seq False 20 gaussian d7pm05
+229 gfp btcvae esm2xs Seqpooled False 20 gaussian d7pm05
+230 gfp btcvae esm2xs Seq False 50 gaussian d7pm05
+231 gfp btcvae esm2xs Seqpooled False 50 gaussian d7pm05
+232 gfp btcvae esm2xs Seq False 100 gaussian d7pm05
+233 gfp btcvae esm2xs Seqpooled False 100 gaussian d7pm05
+234 gfp btcvae esm2xs Seq False 150 gaussian d7pm05
+235 gfp btcvae esm2xs Seqpooled False 150 gaussian d7pm05
+236 gfp btcvae esm2xs Seq False 200 gaussian d7pm05
+237 gfp btcvae esm2xs Seqpooled False 200 gaussian d7pm05
+238 gfp btcvae esm2 Seq False 2 gaussian d7pm05
+239 gfp btcvae esm2 Seqpooled False 2 gaussian d7pm05
+240 gfp btcvae esm2 Seq False 10 gaussian d7pm05
+241 gfp btcvae esm2 Seqpooled False 10 gaussian d7pm05
+242 gfp btcvae esm2 Seq False 20 gaussian d7pm05
+243 gfp btcvae esm2 Seqpooled False 20 gaussian d7pm05
+244 gfp btcvae esm2 Seq False 50 gaussian d7pm05
+245 gfp btcvae esm2 Seqpooled False 50 gaussian d7pm05
+246 gfp btcvae esm2 Seq False 100 gaussian d7pm05
+247 gfp btcvae esm2 Seqpooled False 100 gaussian d7pm05
+248 gfp btcvae esm2 Seq False 150 gaussian d7pm05
+249 gfp btcvae esm2 Seqpooled False 150 gaussian d7pm05
+250 gfp btcvae esm2 Seq False 200 gaussian d7pm05
+251 gfp btcvae esm2 Seqpooled False 200 gaussian d7pm05
+252 yeast VAE esm2xs Seq False 2 gaussian pabp
+253 yeast VAE esm2xs Seqpooled False 2 gaussian pabp
+254 yeast VAE esm2xs Seq False 10 gaussian pabp
+255 yeast VAE esm2xs Seqpooled False 10 gaussian pabp
+256 yeast VAE esm2xs Seq False 20 gaussian pabp
+257 yeast VAE esm2xs Seqpooled False 20 gaussian pabp
+258 yeast VAE esm2xs Seq False 50 gaussian pabp
+259 yeast VAE esm2xs Seqpooled False 50 gaussian pabp
+260 yeast VAE esm2xs Seq False 100 gaussian pabp
+261 yeast VAE esm2xs Seqpooled False 100 gaussian pabp
+262 yeast VAE esm2xs Seq False 150 gaussian pabp
+263 yeast VAE esm2xs Seqpooled False 150 gaussian pabp
+264 yeast VAE esm2xs Seq False 200 gaussian pabp
+265 yeast VAE esm2xs Seqpooled False 200 gaussian pabp
+266 yeast VAE esm2 Seq False 2 gaussian pabp
+267 yeast VAE esm2 Seqpooled False 2 gaussian pabp
+268 yeast VAE esm2 Seq False 10 gaussian pabp
+269 yeast VAE esm2 Seqpooled False 10 gaussian pabp
+270 yeast VAE esm2 Seq False 20 gaussian pabp
+271 yeast VAE esm2 Seqpooled False 20 gaussian pabp
+272 yeast VAE esm2 Seq False 50 gaussian pabp
+273 yeast VAE esm2 Seqpooled False 50 gaussian pabp
+274 yeast VAE esm2 Seq False 100 gaussian pabp
+275 yeast VAE esm2 Seqpooled False 100 gaussian pabp
+276 yeast VAE esm2 Seq False 150 gaussian pabp
+277 yeast VAE esm2 Seqpooled False 150 gaussian pabp
+278 yeast VAE esm2 Seq False 200 gaussian pabp
+279 yeast VAE esm2 Seqpooled False 200 gaussian pabp
+280 yeast factor esm2xs Seq False 2 gaussian pabp
+281 yeast factor esm2xs Seqpooled False 2 gaussian pabp
+282 yeast factor esm2xs Seq False 10 gaussian pabp
+283 yeast factor esm2xs Seqpooled False 10 gaussian pabp
+284 yeast factor esm2xs Seq False 20 gaussian pabp
+285 yeast factor esm2xs Seqpooled False 20 gaussian pabp
+286 yeast factor esm2xs Seq False 50 gaussian pabp
+287 yeast factor esm2xs Seqpooled False 50 gaussian pabp
+288 yeast factor esm2xs Seq False 100 gaussian pabp
+289 yeast factor esm2xs Seqpooled False 100 gaussian pabp
+290 yeast factor esm2xs Seq False 150 gaussian pabp
+291 yeast factor esm2xs Seqpooled False 150 gaussian pabp
+292 yeast factor esm2xs Seq False 200 gaussian pabp
+293 yeast factor esm2xs Seqpooled False 200 gaussian pabp
+294 yeast factor esm2 Seq False 2 gaussian pabp
+295 yeast factor esm2 Seqpooled False 2 gaussian pabp
+296 yeast factor esm2 Seq False 10 gaussian pabp
+297 yeast factor esm2 Seqpooled False 10 gaussian pabp
+298 yeast factor esm2 Seq False 20 gaussian pabp
+299 yeast factor esm2 Seqpooled False 20 gaussian pabp
+300 yeast factor esm2 Seq False 50 gaussian pabp
+301 yeast factor esm2 Seqpooled False 50 gaussian pabp
+302 yeast factor esm2 Seq False 100 gaussian pabp
+303 yeast factor esm2 Seqpooled False 100 gaussian pabp
+304 yeast factor esm2 Seq False 150 gaussian pabp
+305 yeast factor esm2 Seqpooled False 150 gaussian pabp
+306 yeast factor esm2 Seq False 200 gaussian pabp
+307 yeast factor esm2 Seqpooled False 200 gaussian pabp
+308 yeast btcvae esm2xs Seq False 2 gaussian pabp
+309 yeast btcvae esm2xs Seqpooled False 2 gaussian pabp
+310 yeast btcvae esm2xs Seq False 10 gaussian pabp
+311 yeast btcvae esm2xs Seqpooled False 10 gaussian pabp
+312 yeast btcvae esm2xs Seq False 20 gaussian pabp
+313 yeast btcvae esm2xs Seqpooled False 20 gaussian pabp
+314 yeast btcvae esm2xs Seq False 50 gaussian pabp
+315 yeast btcvae esm2xs Seqpooled False 50 gaussian pabp
+316 yeast btcvae esm2xs Seq False 100 gaussian pabp
+317 yeast btcvae esm2xs Seqpooled False 100 gaussian pabp
+318 yeast btcvae esm2xs Seq False 150 gaussian pabp
+319 yeast btcvae esm2xs Seqpooled False 150 gaussian pabp
+320 yeast btcvae esm2xs Seq False 200 gaussian pabp
+321 yeast btcvae esm2xs Seqpooled False 200 gaussian pabp
+322 yeast btcvae esm2 Seq False 2 gaussian pabp
+323 yeast btcvae esm2 Seqpooled False 2 gaussian pabp
+324 yeast btcvae esm2 Seq False 10 gaussian pabp
+325 yeast btcvae esm2 Seqpooled False 10 gaussian pabp
+326 yeast btcvae esm2 Seq False 20 gaussian pabp
+327 yeast btcvae esm2 Seqpooled False 20 gaussian pabp
+328 yeast btcvae esm2 Seq False 50 gaussian pabp
+329 yeast btcvae esm2 Seqpooled False 50 gaussian pabp
+330 yeast btcvae esm2 Seq False 100 gaussian pabp
+331 yeast btcvae esm2 Seqpooled False 100 gaussian pabp
+332 yeast btcvae esm2 Seq False 150 gaussian pabp
+333 yeast btcvae esm2 Seqpooled False 150 gaussian pabp
+334 yeast btcvae esm2 Seq False 200 gaussian pabp
+335 yeast btcvae esm2 Seqpooled False 200 gaussian pabp
+336 yeast VAE esm2xs Seq False 2 gaussian his7
+337 yeast VAE esm2xs Seqpooled False 2 gaussian his7
+338 yeast VAE esm2xs Seq False 10 gaussian his7
+339 yeast VAE esm2xs Seqpooled False 10 gaussian his7
+340 yeast VAE esm2xs Seq False 20 gaussian his7
+341 yeast VAE esm2xs Seqpooled False 20 gaussian his7
+342 yeast VAE esm2xs Seq False 50 gaussian his7
+343 yeast VAE esm2xs Seqpooled False 50 gaussian his7
+344 yeast VAE esm2xs Seq False 100 gaussian his7
+345 yeast VAE esm2xs Seqpooled False 100 gaussian his7
+346 yeast VAE esm2xs Seq False 150 gaussian his7
+347 yeast VAE esm2xs Seqpooled False 150 gaussian his7
+348 yeast VAE esm2xs Seq False 200 gaussian his7
+349 yeast VAE esm2xs Seqpooled False 200 gaussian his7
+350 yeast VAE esm2 Seq False 2 gaussian his7
+351 yeast VAE esm2 Seqpooled False 2 gaussian his7
+352 yeast VAE esm2 Seq False 10 gaussian his7
+353 yeast VAE esm2 Seqpooled False 10 gaussian his7
+354 yeast VAE esm2 Seq False 20 gaussian his7
+355 yeast VAE esm2 Seqpooled False 20 gaussian his7
+356 yeast VAE esm2 Seq False 50 gaussian his7
+357 yeast VAE esm2 Seqpooled False 50 gaussian his7
+358 yeast VAE esm2 Seq False 100 gaussian his7
+359 yeast VAE esm2 Seqpooled False 100 gaussian his7
+360 yeast VAE esm2 Seq False 150 gaussian his7
+361 yeast VAE esm2 Seqpooled False 150 gaussian his7
+362 yeast VAE esm2 Seq False 200 gaussian his7
+363 yeast VAE esm2 Seqpooled False 200 gaussian his7
+364 yeast factor esm2xs Seq False 2 gaussian his7
+365 yeast factor esm2xs Seqpooled False 2 gaussian his7
+366 yeast factor esm2xs Seq False 10 gaussian his7
+367 yeast factor esm2xs Seqpooled False 10 gaussian his7
+368 yeast factor esm2xs Seq False 20 gaussian his7
+369 yeast factor esm2xs Seqpooled False 20 gaussian his7
+370 yeast factor esm2xs Seq False 50 gaussian his7
+371 yeast factor esm2xs Seqpooled False 50 gaussian his7
+372 yeast factor esm2xs Seq False 100 gaussian his7
+373 yeast factor esm2xs Seqpooled False 100 gaussian his7
+374 yeast factor esm2xs Seq False 150 gaussian his7
+375 yeast factor esm2xs Seqpooled False 150 gaussian his7
+376 yeast factor esm2xs Seq False 200 gaussian his7
+377 yeast factor esm2xs Seqpooled False 200 gaussian his7
+378 yeast factor esm2 Seq False 2 gaussian his7
+379 yeast factor esm2 Seqpooled False 2 gaussian his7
+380 yeast factor esm2 Seq False 10 gaussian his7
+381 yeast factor esm2 Seqpooled False 10 gaussian his7
+382 yeast factor esm2 Seq False 20 gaussian his7
+383 yeast factor esm2 Seqpooled False 20 gaussian his7
+384 yeast factor esm2 Seq False 50 gaussian his7
+385 yeast factor esm2 Seqpooled False 50 gaussian his7
+386 yeast factor esm2 Seq False 100 gaussian his7
+387 yeast factor esm2 Seqpooled False 100 gaussian his7
+388 yeast factor esm2 Seq False 150 gaussian his7
+389 yeast factor esm2 Seqpooled False 150 gaussian his7
+390 yeast factor esm2 Seq False 200 gaussian his7
+391 yeast factor esm2 Seqpooled False 200 gaussian his7
+392 yeast btcvae esm2xs Seq False 2 gaussian his7
+393 yeast btcvae esm2xs Seqpooled False 2 gaussian his7
+394 yeast btcvae esm2xs Seq False 10 gaussian his7
+395 yeast btcvae esm2xs Seqpooled False 10 gaussian his7
+396 yeast btcvae esm2xs Seq False 20 gaussian his7
+397 yeast btcvae esm2xs Seqpooled False 20 gaussian his7
+398 yeast btcvae esm2xs Seq False 50 gaussian his7
+399 yeast btcvae esm2xs Seqpooled False 50 gaussian his7
+400 yeast btcvae esm2xs Seq False 100 gaussian his7
+401 yeast btcvae esm2xs Seqpooled False 100 gaussian his7
+402 yeast btcvae esm2xs Seq False 150 gaussian his7
+403 yeast btcvae esm2xs Seqpooled False 150 gaussian his7
+404 yeast btcvae esm2xs Seq False 200 gaussian his7
+405 yeast btcvae esm2xs Seqpooled False 200 gaussian his7
+406 yeast btcvae esm2 Seq False 2 gaussian his7
+407 yeast btcvae esm2 Seqpooled False 2 gaussian his7
+408 yeast btcvae esm2 Seq False 10 gaussian his7
+409 yeast btcvae esm2 Seqpooled False 10 gaussian his7
+410 yeast btcvae esm2 Seq False 20 gaussian his7
+411 yeast btcvae esm2 Seqpooled False 20 gaussian his7
+412 yeast btcvae esm2 Seq False 50 gaussian his7
+413 yeast btcvae esm2 Seqpooled False 50 gaussian his7
+414 yeast btcvae esm2 Seq False 100 gaussian his7
+415 yeast btcvae esm2 Seqpooled False 100 gaussian his7
+416 yeast btcvae esm2 Seq False 150 gaussian his7
+417 yeast btcvae esm2 Seqpooled False 150 gaussian his7
+418 yeast btcvae esm2 Seq False 200 gaussian his7
+419 yeast btcvae esm2 Seqpooled False 200 gaussian his7
+420 gfp VAE esm2xs Seqpooled True 2 gaussian 
+421 gfp VAE esm2xs Seqpooled True 10 gaussian 
+422 gfp VAE esm2xs Seqpooled True 20 gaussian 
+423 gfp VAE esm2xs Seqpooled True 50 gaussian 
+424 gfp VAE esm2xs Seqpooled True 100 gaussian 
+425 gfp VAE esm2xs Seqpooled True 150 gaussian 
+426 gfp VAE esm2xs Seqpooled True 200 gaussian 
+427 gfp VAE esm2 Seqpooled True 2 gaussian 
+428 gfp VAE esm2 Seqpooled True 10 gaussian 
+429 gfp VAE esm2 Seqpooled True 20 gaussian 
+430 gfp VAE esm2 Seqpooled True 50 gaussian 
+431 gfp VAE esm2 Seqpooled True 100 gaussian 
+432 gfp VAE esm2 Seqpooled True 150 gaussian 
+433 gfp VAE esm2 Seqpooled True 200 gaussian 
+434 gfp factor esm2xs Seqpooled True 2 gaussian 
+435 gfp factor esm2xs Seqpooled True 10 gaussian 
+436 gfp factor esm2xs Seqpooled True 20 gaussian 
+437 gfp factor esm2xs Seqpooled True 50 gaussian 
+438 gfp factor esm2xs Seqpooled True 100 gaussian 
+439 gfp factor esm2xs Seqpooled True 150 gaussian 
+440 gfp factor esm2xs Seqpooled True 200 gaussian 
+441 gfp factor esm2 Seqpooled True 2 gaussian 
+442 gfp factor esm2 Seqpooled True 10 gaussian 
+443 gfp factor esm2 Seqpooled True 20 gaussian 
+444 gfp factor esm2 Seqpooled True 50 gaussian 
+445 gfp factor esm2 Seqpooled True 100 gaussian 
+446 gfp factor esm2 Seqpooled True 150 gaussian 
+447 gfp factor esm2 Seqpooled True 200 gaussian 
+448 gfp btcvae esm2xs Seqpooled True 2 gaussian 
+449 gfp btcvae esm2xs Seqpooled True 10 gaussian 
+450 gfp btcvae esm2xs Seqpooled True 20 gaussian 
+451 gfp btcvae esm2xs Seqpooled True 50 gaussian 
+452 gfp btcvae esm2xs Seqpooled True 100 gaussian 
+453 gfp btcvae esm2xs Seqpooled True 150 gaussian 
+454 gfp btcvae esm2xs Seqpooled True 200 gaussian 
+455 gfp btcvae esm2 Seqpooled True 2 gaussian 
+456 gfp btcvae esm2 Seqpooled True 10 gaussian 
+457 gfp btcvae esm2 Seqpooled True 20 gaussian 
+458 gfp btcvae esm2 Seqpooled True 50 gaussian 
+459 gfp btcvae esm2 Seqpooled True 100 gaussian 
+460 gfp btcvae esm2 Seqpooled True 150 gaussian 
+461 gfp btcvae esm2 Seqpooled True 200 gaussian 
+462 yeast VAE esm2xs Seqpooled True 2 gaussian 
+463 yeast VAE esm2xs Seqpooled True 10 gaussian 
+464 yeast VAE esm2xs Seqpooled True 20 gaussian 
+465 yeast VAE esm2xs Seqpooled True 50 gaussian 
+466 yeast VAE esm2xs Seqpooled True 100 gaussian 
+467 yeast VAE esm2xs Seqpooled True 150 gaussian 
+468 yeast VAE esm2xs Seqpooled True 200 gaussian 
+469 yeast VAE esm2 Seqpooled True 2 gaussian 
+470 yeast VAE esm2 Seqpooled True 10 gaussian 
+471 yeast VAE esm2 Seqpooled True 20 gaussian 
+472 yeast VAE esm2 Seqpooled True 50 gaussian 
+473 yeast VAE esm2 Seqpooled True 100 gaussian 
+474 yeast VAE esm2 Seqpooled True 150 gaussian 
+475 yeast VAE esm2 Seqpooled True 200 gaussian 
+476 yeast factor esm2xs Seqpooled True 2 gaussian 
+477 yeast factor esm2xs Seqpooled True 10 gaussian 
+478 yeast factor esm2xs Seqpooled True 20 gaussian 
+479 yeast factor esm2xs Seqpooled True 50 gaussian 
+480 yeast factor esm2xs Seqpooled True 100 gaussian 
+481 yeast factor esm2xs Seqpooled True 150 gaussian 
+482 yeast factor esm2xs Seqpooled True 200 gaussian 
+483 yeast factor esm2 Seqpooled True 2 gaussian 
+484 yeast factor esm2 Seqpooled True 10 gaussian 
+485 yeast factor esm2 Seqpooled True 20 gaussian 
+486 yeast factor esm2 Seqpooled True 50 gaussian 
+487 yeast factor esm2 Seqpooled True 100 gaussian 
+488 yeast factor esm2 Seqpooled True 150 gaussian 
+489 yeast factor esm2 Seqpooled True 200 gaussian 
+490 yeast btcvae esm2xs Seqpooled True 2 gaussian 
+491 yeast btcvae esm2xs Seqpooled True 10 gaussian 
+492 yeast btcvae esm2xs Seqpooled True 20 gaussian 
+493 yeast btcvae esm2xs Seqpooled True 50 gaussian 
+494 yeast btcvae esm2xs Seqpooled True 100 gaussian 
+495 yeast btcvae esm2xs Seqpooled True 150 gaussian 
+496 yeast btcvae esm2xs Seqpooled True 200 gaussian 
+497 yeast btcvae esm2 Seqpooled True 2 gaussian 
+498 yeast btcvae esm2 Seqpooled True 10 gaussian 
+499 yeast btcvae esm2 Seqpooled True 20 gaussian 
+500 yeast btcvae esm2 Seqpooled True 50 gaussian 
+501 yeast btcvae esm2 Seqpooled True 100 gaussian 
+502 yeast btcvae esm2 Seqpooled True 150 gaussian 
+503 yeast btcvae esm2 Seqpooled True 200 gaussian 
+504 gfp VAE esm2xs Seq True 2 gaussian gfp
+505 gfp VAE esm2xs Seqpooled True 2 gaussian gfp
+506 gfp VAE esm2xs Seq True 10 gaussian gfp
+507 gfp VAE esm2xs Seqpooled True 10 gaussian gfp
+508 gfp VAE esm2xs Seq True 20 gaussian gfp
+509 gfp VAE esm2xs Seqpooled True 20 gaussian gfp
+510 gfp VAE esm2xs Seq True 50 gaussian gfp
+511 gfp VAE esm2xs Seqpooled True 50 gaussian gfp
+512 gfp VAE esm2xs Seq True 100 gaussian gfp
+513 gfp VAE esm2xs Seqpooled True 100 gaussian gfp
+514 gfp VAE esm2xs Seq True 150 gaussian gfp
+515 gfp VAE esm2xs Seqpooled True 150 gaussian gfp
+516 gfp VAE esm2xs Seq True 200 gaussian gfp
+517 gfp VAE esm2xs Seqpooled True 200 gaussian gfp
+518 gfp VAE esm2 Seq True 2 gaussian gfp
+519 gfp VAE esm2 Seqpooled True 2 gaussian gfp
+520 gfp VAE esm2 Seq True 10 gaussian gfp
+521 gfp VAE esm2 Seqpooled True 10 gaussian gfp
+522 gfp VAE esm2 Seq True 20 gaussian gfp
+523 gfp VAE esm2 Seqpooled True 20 gaussian gfp
+524 gfp VAE esm2 Seq True 50 gaussian gfp
+525 gfp VAE esm2 Seqpooled True 50 gaussian gfp
+526 gfp VAE esm2 Seq True 100 gaussian gfp
+527 gfp VAE esm2 Seqpooled True 100 gaussian gfp
+528 gfp VAE esm2 Seq True 150 gaussian gfp
+529 gfp VAE esm2 Seqpooled True 150 gaussian gfp
+530 gfp VAE esm2 Seq True 200 gaussian gfp
+531 gfp VAE esm2 Seqpooled True 200 gaussian gfp
+532 gfp factor esm2xs Seq True 2 gaussian gfp
+533 gfp factor esm2xs Seqpooled True 2 gaussian gfp
+534 gfp factor esm2xs Seq True 10 gaussian gfp
+535 gfp factor esm2xs Seqpooled True 10 gaussian gfp
+536 gfp factor esm2xs Seq True 20 gaussian gfp
+537 gfp factor esm2xs Seqpooled True 20 gaussian gfp
+538 gfp factor esm2xs Seq True 50 gaussian gfp
+539 gfp factor esm2xs Seqpooled True 50 gaussian gfp
+540 gfp factor esm2xs Seq True 100 gaussian gfp
+541 gfp factor esm2xs Seqpooled True 100 gaussian gfp
+542 gfp factor esm2xs Seq True 150 gaussian gfp
+543 gfp factor esm2xs Seqpooled True 150 gaussian gfp
+544 gfp factor esm2xs Seq True 200 gaussian gfp
+545 gfp factor esm2xs Seqpooled True 200 gaussian gfp
+546 gfp factor esm2 Seq True 2 gaussian gfp
+547 gfp factor esm2 Seqpooled True 2 gaussian gfp
+548 gfp factor esm2 Seq True 10 gaussian gfp
+549 gfp factor esm2 Seqpooled True 10 gaussian gfp
+550 gfp factor esm2 Seq True 20 gaussian gfp
+551 gfp factor esm2 Seqpooled True 20 gaussian gfp
+552 gfp factor esm2 Seq True 50 gaussian gfp
+553 gfp factor esm2 Seqpooled True 50 gaussian gfp
+554 gfp factor esm2 Seq True 100 gaussian gfp
+555 gfp factor esm2 Seqpooled True 100 gaussian gfp
+556 gfp factor esm2 Seq True 150 gaussian gfp
+557 gfp factor esm2 Seqpooled True 150 gaussian gfp
+558 gfp factor esm2 Seq True 200 gaussian gfp
+559 gfp factor esm2 Seqpooled True 200 gaussian gfp
+560 gfp btcvae esm2xs Seq True 2 gaussian gfp
+561 gfp btcvae esm2xs Seqpooled True 2 gaussian gfp
+562 gfp btcvae esm2xs Seq True 10 gaussian gfp
+563 gfp btcvae esm2xs Seqpooled True 10 gaussian gfp
+564 gfp btcvae esm2xs Seq True 20 gaussian gfp
+565 gfp btcvae esm2xs Seqpooled True 20 gaussian gfp
+566 gfp btcvae esm2xs Seq True 50 gaussian gfp
+567 gfp btcvae esm2xs Seqpooled True 50 gaussian gfp
+568 gfp btcvae esm2xs Seq True 100 gaussian gfp
+569 gfp btcvae esm2xs Seqpooled True 100 gaussian gfp
+570 gfp btcvae esm2xs Seq True 150 gaussian gfp
+571 gfp btcvae esm2xs Seqpooled True 150 gaussian gfp
+572 gfp btcvae esm2xs Seq True 200 gaussian gfp
+573 gfp btcvae esm2xs Seqpooled True 200 gaussian gfp
+574 gfp btcvae esm2 Seq True 2 gaussian gfp
+575 gfp btcvae esm2 Seqpooled True 2 gaussian gfp
+576 gfp btcvae esm2 Seq True 10 gaussian gfp
+577 gfp btcvae esm2 Seqpooled True 10 gaussian gfp
+578 gfp btcvae esm2 Seq True 20 gaussian gfp
+579 gfp btcvae esm2 Seqpooled True 20 gaussian gfp
+580 gfp btcvae esm2 Seq True 50 gaussian gfp
+581 gfp btcvae esm2 Seqpooled True 50 gaussian gfp
+582 gfp btcvae esm2 Seq True 100 gaussian gfp
+583 gfp btcvae esm2 Seqpooled True 100 gaussian gfp
+584 gfp btcvae esm2 Seq True 150 gaussian gfp
+585 gfp btcvae esm2 Seqpooled True 150 gaussian gfp
+586 gfp btcvae esm2 Seq True 200 gaussian gfp
+587 gfp btcvae esm2 Seqpooled True 200 gaussian gfp
+588 gfp VAE esm2xs Seq True 2 gaussian d7pm05
+589 gfp VAE esm2xs Seqpooled True 2 gaussian d7pm05
+590 gfp VAE esm2xs Seq True 10 gaussian d7pm05
+591 gfp VAE esm2xs Seqpooled True 10 gaussian d7pm05
+592 gfp VAE esm2xs Seq True 20 gaussian d7pm05
+593 gfp VAE esm2xs Seqpooled True 20 gaussian d7pm05
+594 gfp VAE esm2xs Seq True 50 gaussian d7pm05
+595 gfp VAE esm2xs Seqpooled True 50 gaussian d7pm05
+596 gfp VAE esm2xs Seq True 100 gaussian d7pm05
+597 gfp VAE esm2xs Seqpooled True 100 gaussian d7pm05
+598 gfp VAE esm2xs Seq True 150 gaussian d7pm05
+599 gfp VAE esm2xs Seqpooled True 150 gaussian d7pm05
+600 gfp VAE esm2xs Seq True 200 gaussian d7pm05
+601 gfp VAE esm2xs Seqpooled True 200 gaussian d7pm05
+602 gfp VAE esm2 Seq True 2 gaussian d7pm05
+603 gfp VAE esm2 Seqpooled True 2 gaussian d7pm05
+604 gfp VAE esm2 Seq True 10 gaussian d7pm05
+605 gfp VAE esm2 Seqpooled True 10 gaussian d7pm05
+606 gfp VAE esm2 Seq True 20 gaussian d7pm05
+607 gfp VAE esm2 Seqpooled True 20 gaussian d7pm05
+608 gfp VAE esm2 Seq True 50 gaussian d7pm05
+609 gfp VAE esm2 Seqpooled True 50 gaussian d7pm05
+610 gfp VAE esm2 Seq True 100 gaussian d7pm05
+611 gfp VAE esm2 Seqpooled True 100 gaussian d7pm05
+612 gfp VAE esm2 Seq True 150 gaussian d7pm05
+613 gfp VAE esm2 Seqpooled True 150 gaussian d7pm05
+614 gfp VAE esm2 Seq True 200 gaussian d7pm05
+615 gfp VAE esm2 Seqpooled True 200 gaussian d7pm05
+616 gfp factor esm2xs Seq True 2 gaussian d7pm05
+617 gfp factor esm2xs Seqpooled True 2 gaussian d7pm05
+618 gfp factor esm2xs Seq True 10 gaussian d7pm05
+619 gfp factor esm2xs Seqpooled True 10 gaussian d7pm05
+620 gfp factor esm2xs Seq True 20 gaussian d7pm05
+621 gfp factor esm2xs Seqpooled True 20 gaussian d7pm05
+622 gfp factor esm2xs Seq True 50 gaussian d7pm05
+623 gfp factor esm2xs Seqpooled True 50 gaussian d7pm05
+624 gfp factor esm2xs Seq True 100 gaussian d7pm05
+625 gfp factor esm2xs Seqpooled True 100 gaussian d7pm05
+626 gfp factor esm2xs Seq True 150 gaussian d7pm05
+627 gfp factor esm2xs Seqpooled True 150 gaussian d7pm05
+628 gfp factor esm2xs Seq True 200 gaussian d7pm05
+629 gfp factor esm2xs Seqpooled True 200 gaussian d7pm05
+630 gfp factor esm2 Seq True 2 gaussian d7pm05
+631 gfp factor esm2 Seqpooled True 2 gaussian d7pm05
+632 gfp factor esm2 Seq True 10 gaussian d7pm05
+633 gfp factor esm2 Seqpooled True 10 gaussian d7pm05
+634 gfp factor esm2 Seq True 20 gaussian d7pm05
+635 gfp factor esm2 Seqpooled True 20 gaussian d7pm05
+636 gfp factor esm2 Seq True 50 gaussian d7pm05
+637 gfp factor esm2 Seqpooled True 50 gaussian d7pm05
+638 gfp factor esm2 Seq True 100 gaussian d7pm05
+639 gfp factor esm2 Seqpooled True 100 gaussian d7pm05
+640 gfp factor esm2 Seq True 150 gaussian d7pm05
+641 gfp factor esm2 Seqpooled True 150 gaussian d7pm05
+642 gfp factor esm2 Seq True 200 gaussian d7pm05
+643 gfp factor esm2 Seqpooled True 200 gaussian d7pm05
+644 gfp btcvae esm2xs Seq True 2 gaussian d7pm05
+645 gfp btcvae esm2xs Seqpooled True 2 gaussian d7pm05
+646 gfp btcvae esm2xs Seq True 10 gaussian d7pm05
+647 gfp btcvae esm2xs Seqpooled True 10 gaussian d7pm05
+648 gfp btcvae esm2xs Seq True 20 gaussian d7pm05
+649 gfp btcvae esm2xs Seqpooled True 20 gaussian d7pm05
+650 gfp btcvae esm2xs Seq True 50 gaussian d7pm05
+651 gfp btcvae esm2xs Seqpooled True 50 gaussian d7pm05
+652 gfp btcvae esm2xs Seq True 100 gaussian d7pm05
+653 gfp btcvae esm2xs Seqpooled True 100 gaussian d7pm05
+654 gfp btcvae esm2xs Seq True 150 gaussian d7pm05
+655 gfp btcvae esm2xs Seqpooled True 150 gaussian d7pm05
+656 gfp btcvae esm2xs Seq True 200 gaussian d7pm05
+657 gfp btcvae esm2xs Seqpooled True 200 gaussian d7pm05
+658 gfp btcvae esm2 Seq True 2 gaussian d7pm05
+659 gfp btcvae esm2 Seqpooled True 2 gaussian d7pm05
+660 gfp btcvae esm2 Seq True 10 gaussian d7pm05
+661 gfp btcvae esm2 Seqpooled True 10 gaussian d7pm05
+662 gfp btcvae esm2 Seq True 20 gaussian d7pm05
+663 gfp btcvae esm2 Seqpooled True 20 gaussian d7pm05
+664 gfp btcvae esm2 Seq True 50 gaussian d7pm05
+665 gfp btcvae esm2 Seqpooled True 50 gaussian d7pm05
+666 gfp btcvae esm2 Seq True 100 gaussian d7pm05
+667 gfp btcvae esm2 Seqpooled True 100 gaussian d7pm05
+668 gfp btcvae esm2 Seq True 150 gaussian d7pm05
+669 gfp btcvae esm2 Seqpooled True 150 gaussian d7pm05
+670 gfp btcvae esm2 Seq True 200 gaussian d7pm05
+671 gfp btcvae esm2 Seqpooled True 200 gaussian d7pm05
+672 yeast VAE esm2xs Seq True 2 gaussian pabp
+673 yeast VAE esm2xs Seqpooled True 2 gaussian pabp
+674 yeast VAE esm2xs Seq True 10 gaussian pabp
+675 yeast VAE esm2xs Seqpooled True 10 gaussian pabp
+676 yeast VAE esm2xs Seq True 20 gaussian pabp
+677 yeast VAE esm2xs Seqpooled True 20 gaussian pabp
+678 yeast VAE esm2xs Seq True 50 gaussian pabp
+679 yeast VAE esm2xs Seqpooled True 50 gaussian pabp
+680 yeast VAE esm2xs Seq True 100 gaussian pabp
+681 yeast VAE esm2xs Seqpooled True 100 gaussian pabp
+682 yeast VAE esm2xs Seq True 150 gaussian pabp
+683 yeast VAE esm2xs Seqpooled True 150 gaussian pabp
+684 yeast VAE esm2xs Seq True 200 gaussian pabp
+685 yeast VAE esm2xs Seqpooled True 200 gaussian pabp
+686 yeast VAE esm2 Seq True 2 gaussian pabp
+687 yeast VAE esm2 Seqpooled True 2 gaussian pabp
+688 yeast VAE esm2 Seq True 10 gaussian pabp
+689 yeast VAE esm2 Seqpooled True 10 gaussian pabp
+690 yeast VAE esm2 Seq True 20 gaussian pabp
+691 yeast VAE esm2 Seqpooled True 20 gaussian pabp
+692 yeast VAE esm2 Seq True 50 gaussian pabp
+693 yeast VAE esm2 Seqpooled True 50 gaussian pabp
+694 yeast VAE esm2 Seq True 100 gaussian pabp
+695 yeast VAE esm2 Seqpooled True 100 gaussian pabp
+696 yeast VAE esm2 Seq True 150 gaussian pabp
+697 yeast VAE esm2 Seqpooled True 150 gaussian pabp
+698 yeast VAE esm2 Seq True 200 gaussian pabp
+699 yeast VAE esm2 Seqpooled True 200 gaussian pabp
+700 yeast factor esm2xs Seq True 2 gaussian pabp
+701 yeast factor esm2xs Seqpooled True 2 gaussian pabp
+702 yeast factor esm2xs Seq True 10 gaussian pabp
+703 yeast factor esm2xs Seqpooled True 10 gaussian pabp
+704 yeast factor esm2xs Seq True 20 gaussian pabp
+705 yeast factor esm2xs Seqpooled True 20 gaussian pabp
+706 yeast factor esm2xs Seq True 50 gaussian pabp
+707 yeast factor esm2xs Seqpooled True 50 gaussian pabp
+708 yeast factor esm2xs Seq True 100 gaussian pabp
+709 yeast factor esm2xs Seqpooled True 100 gaussian pabp
+710 yeast factor esm2xs Seq True 150 gaussian pabp
+711 yeast factor esm2xs Seqpooled True 150 gaussian pabp
+712 yeast factor esm2xs Seq True 200 gaussian pabp
+713 yeast factor esm2xs Seqpooled True 200 gaussian pabp
+714 yeast factor esm2 Seq True 2 gaussian pabp
+715 yeast factor esm2 Seqpooled True 2 gaussian pabp
+716 yeast factor esm2 Seq True 10 gaussian pabp
+717 yeast factor esm2 Seqpooled True 10 gaussian pabp
+718 yeast factor esm2 Seq True 20 gaussian pabp
+719 yeast factor esm2 Seqpooled True 20 gaussian pabp
+720 yeast factor esm2 Seq True 50 gaussian pabp
+721 yeast factor esm2 Seqpooled True 50 gaussian pabp
+722 yeast factor esm2 Seq True 100 gaussian pabp
+723 yeast factor esm2 Seqpooled True 100 gaussian pabp
+724 yeast factor esm2 Seq True 150 gaussian pabp
+725 yeast factor esm2 Seqpooled True 150 gaussian pabp
+726 yeast factor esm2 Seq True 200 gaussian pabp
+727 yeast factor esm2 Seqpooled True 200 gaussian pabp
+728 yeast btcvae esm2xs Seq True 2 gaussian pabp
+729 yeast btcvae esm2xs Seqpooled True 2 gaussian pabp
+730 yeast btcvae esm2xs Seq True 10 gaussian pabp
+731 yeast btcvae esm2xs Seqpooled True 10 gaussian pabp
+732 yeast btcvae esm2xs Seq True 20 gaussian pabp
+733 yeast btcvae esm2xs Seqpooled True 20 gaussian pabp
+734 yeast btcvae esm2xs Seq True 50 gaussian pabp
+735 yeast btcvae esm2xs Seqpooled True 50 gaussian pabp
+736 yeast btcvae esm2xs Seq True 100 gaussian pabp
+737 yeast btcvae esm2xs Seqpooled True 100 gaussian pabp
+738 yeast btcvae esm2xs Seq True 150 gaussian pabp
+739 yeast btcvae esm2xs Seqpooled True 150 gaussian pabp
+740 yeast btcvae esm2xs Seq True 200 gaussian pabp
+741 yeast btcvae esm2xs Seqpooled True 200 gaussian pabp
+742 yeast btcvae esm2 Seq True 2 gaussian pabp
+743 yeast btcvae esm2 Seqpooled True 2 gaussian pabp
+744 yeast btcvae esm2 Seq True 10 gaussian pabp
+745 yeast btcvae esm2 Seqpooled True 10 gaussian pabp
+746 yeast btcvae esm2 Seq True 20 gaussian pabp
+747 yeast btcvae esm2 Seqpooled True 20 gaussian pabp
+748 yeast btcvae esm2 Seq True 50 gaussian pabp
+749 yeast btcvae esm2 Seqpooled True 50 gaussian pabp
+750 yeast btcvae esm2 Seq True 100 gaussian pabp
+751 yeast btcvae esm2 Seqpooled True 100 gaussian pabp
+752 yeast btcvae esm2 Seq True 150 gaussian pabp
+753 yeast btcvae esm2 Seqpooled True 150 gaussian pabp
+754 yeast btcvae esm2 Seq True 200 gaussian pabp
+755 yeast btcvae esm2 Seqpooled True 200 gaussian pabp
+756 yeast VAE esm2xs Seq True 2 gaussian his7
+757 yeast VAE esm2xs Seqpooled True 2 gaussian his7
+758 yeast VAE esm2xs Seq True 10 gaussian his7
+759 yeast VAE esm2xs Seqpooled True 10 gaussian his7
+760 yeast VAE esm2xs Seq True 20 gaussian his7
+761 yeast VAE esm2xs Seqpooled True 20 gaussian his7
+762 yeast VAE esm2xs Seq True 50 gaussian his7
+763 yeast VAE esm2xs Seqpooled True 50 gaussian his7
+764 yeast VAE esm2xs Seq True 100 gaussian his7
+765 yeast VAE esm2xs Seqpooled True 100 gaussian his7
+766 yeast VAE esm2xs Seq True 150 gaussian his7
+767 yeast VAE esm2xs Seqpooled True 150 gaussian his7
+768 yeast VAE esm2xs Seq True 200 gaussian his7
+769 yeast VAE esm2xs Seqpooled True 200 gaussian his7
+770 yeast VAE esm2 Seq True 2 gaussian his7
+771 yeast VAE esm2 Seqpooled True 2 gaussian his7
+772 yeast VAE esm2 Seq True 10 gaussian his7
+773 yeast VAE esm2 Seqpooled True 10 gaussian his7
+774 yeast VAE esm2 Seq True 20 gaussian his7
+775 yeast VAE esm2 Seqpooled True 20 gaussian his7
+776 yeast VAE esm2 Seq True 50 gaussian his7
+777 yeast VAE esm2 Seqpooled True 50 gaussian his7
+778 yeast VAE esm2 Seq True 100 gaussian his7
+779 yeast VAE esm2 Seqpooled True 100 gaussian his7
+780 yeast VAE esm2 Seq True 150 gaussian his7
+781 yeast VAE esm2 Seqpooled True 150 gaussian his7
+782 yeast VAE esm2 Seq True 200 gaussian his7
+783 yeast VAE esm2 Seqpooled True 200 gaussian his7
+784 yeast factor esm2xs Seq True 2 gaussian his7
+785 yeast factor esm2xs Seqpooled True 2 gaussian his7
+786 yeast factor esm2xs Seq True 10 gaussian his7
+787 yeast factor esm2xs Seqpooled True 10 gaussian his7
+788 yeast factor esm2xs Seq True 20 gaussian his7
+789 yeast factor esm2xs Seqpooled True 20 gaussian his7
+790 yeast factor esm2xs Seq True 50 gaussian his7
+791 yeast factor esm2xs Seqpooled True 50 gaussian his7
+792 yeast factor esm2xs Seq True 100 gaussian his7
+793 yeast factor esm2xs Seqpooled True 100 gaussian his7
+794 yeast factor esm2xs Seq True 150 gaussian his7
+795 yeast factor esm2xs Seqpooled True 150 gaussian his7
+796 yeast factor esm2xs Seq True 200 gaussian his7
+797 yeast factor esm2xs Seqpooled True 200 gaussian his7
+798 yeast factor esm2 Seq True 2 gaussian his7
+799 yeast factor esm2 Seqpooled True 2 gaussian his7
+800 yeast factor esm2 Seq True 10 gaussian his7
+801 yeast factor esm2 Seqpooled True 10 gaussian his7
+802 yeast factor esm2 Seq True 20 gaussian his7
+803 yeast factor esm2 Seqpooled True 20 gaussian his7
+804 yeast factor esm2 Seq True 50 gaussian his7
+805 yeast factor esm2 Seqpooled True 50 gaussian his7
+806 yeast factor esm2 Seq True 100 gaussian his7
+807 yeast factor esm2 Seqpooled True 100 gaussian his7
+808 yeast factor esm2 Seq True 150 gaussian his7
+809 yeast factor esm2 Seqpooled True 150 gaussian his7
+810 yeast factor esm2 Seq True 200 gaussian his7
+811 yeast factor esm2 Seqpooled True 200 gaussian his7
+812 yeast btcvae esm2xs Seq True 2 gaussian his7
+813 yeast btcvae esm2xs Seqpooled True 2 gaussian his7
+814 yeast btcvae esm2xs Seq True 10 gaussian his7
+815 yeast btcvae esm2xs Seqpooled True 10 gaussian his7
+816 yeast btcvae esm2xs Seq True 20 gaussian his7
+817 yeast btcvae esm2xs Seqpooled True 20 gaussian his7
+818 yeast btcvae esm2xs Seq True 50 gaussian his7
+819 yeast btcvae esm2xs Seqpooled True 50 gaussian his7
+820 yeast btcvae esm2xs Seq True 100 gaussian his7
+821 yeast btcvae esm2xs Seqpooled True 100 gaussian his7
+822 yeast btcvae esm2xs Seq True 150 gaussian his7
+823 yeast btcvae esm2xs Seqpooled True 150 gaussian his7
+824 yeast btcvae esm2xs Seq True 200 gaussian his7
+825 yeast btcvae esm2xs Seqpooled True 200 gaussian his7
+826 yeast btcvae esm2 Seq True 2 gaussian his7
+827 yeast btcvae esm2 Seqpooled True 2 gaussian his7
+828 yeast btcvae esm2 Seq True 10 gaussian his7
+829 yeast btcvae esm2 Seqpooled True 10 gaussian his7
+830 yeast btcvae esm2 Seq True 20 gaussian his7
+831 yeast btcvae esm2 Seqpooled True 20 gaussian his7
+832 yeast btcvae esm2 Seq True 50 gaussian his7
+833 yeast btcvae esm2 Seqpooled True 50 gaussian his7
+834 yeast btcvae esm2 Seq True 100 gaussian his7
+835 yeast btcvae esm2 Seqpooled True 100 gaussian his7
+836 yeast btcvae esm2 Seq True 150 gaussian his7
+837 yeast btcvae esm2 Seqpooled True 150 gaussian his7
+838 yeast btcvae esm2 Seq True 200 gaussian his7
+839 yeast btcvae esm2 Seqpooled True 200 gaussian his7
