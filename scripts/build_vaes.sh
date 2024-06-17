@@ -31,7 +31,7 @@ latent_dim=$(awk -v ArrayID=${SLURM_ARRAY_TASK_ID} '$1==ArrayID {print $7}' ${CO
 rec_dist=$(awk -v ArrayID=${SLURM_ARRAY_TASK_ID} '$1==ArrayID {print $8}' ${CONFIG})
 subset=$(awk -v ArrayID=${SLURM_ARRAY_TASK_ID} '$1==ArrayID {print $9}' ${CONFIG})
 
-vae_type="${loss}_${dataset}_${embedding}_${latent_dim}_${subset}_${rec_dist}"
+vae_type="${loss}_${modeltype}_${dataset}_${embedding}_${latent_dim}_${subset}_${rec_dist}"
 
 cd ${PROJECT_DIR}  # required to be run from here due to relative experiment config paths in repo,
 
